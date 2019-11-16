@@ -1,0 +1,15 @@
+/* your css code */
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    .lang-select {
+        text-transform: uppercase;
+        display: inline-block;
+    }
+
+    nav {
+        position: absolute;
+        display: none;
+    }
+}
