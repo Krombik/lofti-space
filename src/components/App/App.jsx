@@ -11,8 +11,8 @@ class App extends PureComponent {
     console.log(screenNumber)
     return (
       <div className="root">
-        {[<div>kek</div>, <div>bek</div>][screenNumber]}
         <Header />
+        {/* <Home/> */}
         <ProgressDots screens={item} />
       </div>
     );
