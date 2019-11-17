@@ -1,0 +1,44 @@
+$container-max-widths: (xl: 1920px);
+$grid-gutter-width: 190px;
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/reboot";
+@import "../../../node_modules/bootstrap/scss/grid";
+
+$grid-padding: 80px;
+
+body {
+    font-family: 'Montserrat';
+}
+
+.container {
+    padding-right: $grid-padding;
+    padding-left: $grid-padding;
+}
+
+.row {
+    margin-right: - $grid-padding;
+    margin-left: - $grid-padding;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+h2 {
+    font-size: 60px;
+    line-height: 72.75px;
+    font-weight: bold;
+}

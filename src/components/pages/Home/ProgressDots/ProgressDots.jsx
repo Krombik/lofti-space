@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { setScreenNumber } from '../../redux/app/actions'
+import { setScreenNumber } from '../../../../redux/app/actions'
 //import { Test } from './ProgressDots.styles';
 
 class ProgressDots extends PureComponent {
@@ -18,11 +18,22 @@ class ProgressDots extends PureComponent {
   }
 
   render() {
-    const { screens } = this.props;
+    const { screens, screenNumber } = this.props;
+    const dots = screens.map((_, index) => {
+      const isActive = index === screenNumber ? true : false;
+      return (
+        <li
+          key={index}
+          className={isActive ? 'active' : null}
+          onClick={() => { !isActive && this.onScreenChange(index) }}>
+          {index}
+        </li>
+      )
+    })
     return (
       <nav className="progress">
         <ul>
-          {screens.map((_, index) => (<li key={index} onClick={() => { this.onScreenChange(index) }}>{index}</li>))}
+          {dots}
         </ul>
       </nav>
     );
@@ -38,7 +49,7 @@ ProgressDots.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  // blabla: state.blabla,
+  screenNumber: state.app.screenNumber,
 });
 
 const mapDispatchToProps = {

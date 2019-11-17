@@ -1,32 +1,33 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import ProgressDots from './ProgressDots'
+import FirstScreen from './FirstScreen';
 import './style.scss';
-import Home from '../pages/Home'
-import Header from '../Header'
 
-class App extends PureComponent {
+class Home extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.screens = [
+      <FirstScreen />,
+    ];
+  }
   render() {
     const { screenNumber } = this.props;
-    console.log(screenNumber)
-    return (
-      <div className="root">
-        <Header />
-        <Home />
-      </div>
-    );
+    const Screen = this.screens[screenNumber].type;
+    return <Screen className="container"><ProgressDots screens={this.screens} /></Screen>;
   }
 }
 
-App.propTypes = {
+Home.propTypes = {
   // bla: PropTypes.string,
 };
 
-App.defaultProps = {
+Home.defaultProps = {
   // bla: 'test',
 };
 
 const mapStateToProps = state => ({
-  // blabla: state.blabla,
   screenNumber: state.app.screenNumber,
 });
 
@@ -37,4 +38,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(Home);
