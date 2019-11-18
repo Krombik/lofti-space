@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ScreenContent from '../ScreenContent'
 import Slider from "react-slick";
@@ -11,6 +11,10 @@ const FirstScreen = props => {
     desc: 'Оцените качественный сервис, записавшись на пробный день уже сегодня',
     btn: 'ПОПРОБОВАТЬ БЕСПЛАТНО >'
   };
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    setHeight(ref.current.offsetHeight * 5)
+  });
 
   const ref = React.createRef();
   const sliderSettings = {
@@ -22,14 +26,10 @@ const FirstScreen = props => {
       const left = this.currentSlide - 2 < 0 ? 0 : this.currentSlide - 2;
       return (
         <div>
-          <ul>
+          <ul style={{ maxHeight: height }}>
             {
-              dots.map((item, index) => {
-                if (index !== left)
-                  return item;
-                const Item = item.type;
-                return (<Item ref={ref} key={index} {...item.props} />);
-              })
+              dots.map((Item, index) =>
+                index !== left ? Item : (<Item.type ref={ref} key={index} {...Item.props} />))
             }
           </ul>
         </div>
