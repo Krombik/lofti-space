@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScreenContent from '../ScreenContent'
+import Slider from "react-slick";
+import sliderImgs from './slider-img'
 
 const FirstScreen = props => {
   const titleBlock = {
@@ -10,7 +11,55 @@ const FirstScreen = props => {
     desc: 'Оцените качественный сервис, записавшись на пробный день уже сегодня',
     btn: 'ПОПРОБОВАТЬ БЕСПЛАТНО >'
   };
-  const contentBlock = <div className="col-md-6">sd</div>
+
+  const ref = React.createRef();
+  const sliderSettings = {
+    dots: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    appendDots(dots) {
+      const left = this.currentSlide - 2 < 0 ? 0 : this.currentSlide - 2;
+      return (
+        <div>
+          <ul>
+            {
+              dots.map((item, index) => {
+                if (index !== left)
+                  return item;
+                const Item = item.type;
+                return (<Item ref={ref} key={index} {...item.props} />);
+              })
+            }
+          </ul>
+        </div>
+      )
+    },
+    customPaging: i => (
+      <div
+        style={{
+          width: "30px",
+          color: "blue",
+          border: "1px blue solid"
+        }}
+      >
+        {`${i < 9 ? '0' : ''}${i + 1}`}
+      </div>
+    ),
+    onReInit() {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+  const contentBlock = (
+    <div className="col-md-6">
+      <Slider {...sliderSettings}>
+        {sliderImgs.map((item, index) => (<img src={item} key={index} />))}
+      </Slider>
+    </div>
+  );
   return (
     <div className={props.className}>
       {props.children}

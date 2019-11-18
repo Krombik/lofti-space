@@ -1,4 +1,19 @@
 /* your css code */
-.side-text {
-    
+.slick-dots {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    ul {
+        max-height: 150px;
+        height: 100%;
+        overflow-y: hidden;
+    }
+
+    li {
+        display: block;
+        height: auto;
+        width: auto;
+    }
 }

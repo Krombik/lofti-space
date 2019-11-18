@@ -5,6 +5,7 @@ $grid-gutter-width: 190px;
 @import "../../../node_modules/bootstrap/scss/mixins";
 @import "../../../node_modules/bootstrap/scss/reboot";
 @import "../../../node_modules/bootstrap/scss/grid";
+@import "../../../node_modules/bootstrap/scss/utilities";
 
 $grid-padding: 80px;
 
@@ -41,4 +42,8 @@ h2 {
     font-size: 60px;
     line-height: 72.75px;
     font-weight: bold;
+}
+
+.btn {
+    &__red {}
 }

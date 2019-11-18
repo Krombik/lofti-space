@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import ProgressDots from './ProgressDots'
 import FirstScreen from './FirstScreen';
+import SecondScreen from './SecondScreen';
 import './style.scss';
 
 class Home extends PureComponent {
@@ -10,6 +11,7 @@ class Home extends PureComponent {
 
     this.screens = [
       <FirstScreen />,
+      <SecondScreen />,
     ];
   }
   render() {
