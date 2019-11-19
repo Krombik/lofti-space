@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 const FourthScreen = props => {
   const titleBlock = {
-    className: 'col-12',
+    className: 'col-md-6',
     h2: 'Выберите свой оптимальный вариант'
   };
   const sliderContent = [

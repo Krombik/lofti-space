@@ -5,6 +5,7 @@ import FirstScreen from './FirstScreen';
 import SecondScreen from './SecondScreen';
 import ThirdScreen from './ThirdScreen';
 import FourthScreen from './FourthScreen';
+import FifthScreen from './FifthScreen'
 import './style.scss';
 
 class Home extends PureComponent {
@@ -16,6 +17,7 @@ class Home extends PureComponent {
       <SecondScreen />,
       <ThirdScreen />,
       <FourthScreen />,
+      <FifthScreen />
     ];
   }
   render() {
