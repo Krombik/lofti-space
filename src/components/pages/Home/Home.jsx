@@ -4,6 +4,7 @@ import ProgressDots from './ProgressDots'
 import FirstScreen from './FirstScreen';
 import SecondScreen from './SecondScreen';
 import ThirdScreen from './ThirdScreen';
+import FourthScreen from './FourthScreen';
 import './style.scss';
 
 class Home extends PureComponent {
@@ -14,6 +15,7 @@ class Home extends PureComponent {
       <FirstScreen />,
       <SecondScreen />,
       <ThirdScreen />,
+      <FourthScreen />,
     ];
   }
   render() {
