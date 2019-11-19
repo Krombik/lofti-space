@@ -14,18 +14,17 @@ const SecondScreen = props => {
     height: '435px',
     width: '100%'
   };
-  const contentBlock = (
-    <div className="col-md-6">
-      <YouTube
-        videoId="2g811Eo7K8U"
-        opts={opts}
-      />
-    </div>
-  );
   return (
     <div className={props.className}>
       {props.children}
-      <ScreenContent isReverse={true} titleBlock={titleBlock} contentBlock={contentBlock} />
+      <ScreenContent isReverse={true} titleBlock={titleBlock}>
+        <div className="col-md-6">
+          <YouTube
+            videoId="2g811Eo7K8U"
+            opts={opts}
+          />
+        </div>
+      </ScreenContent>
     </div>
   )
 };

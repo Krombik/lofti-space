@@ -53,17 +53,16 @@ const FirstScreen = props => {
       });
     }
   };
-  const contentBlock = (
-    <div className="col-md-6">
-      <Slider {...sliderSettings}>
-        {sliderImgs.map((item, index) => (<img src={item} key={index} />))}
-      </Slider>
-    </div>
-  );
   return (
     <div className={props.className}>
       {props.children}
-      <ScreenContent titleBlock={titleBlock} contentBlock={contentBlock} />
+      <ScreenContent titleBlock={titleBlock}>
+        <div className="col-md-6">
+          <Slider {...sliderSettings}>
+            {sliderImgs.map((item, index) => (<img src={item} key={index} />))}
+          </Slider>
+        </div>
+      </ScreenContent>
     </div>
   )
 };

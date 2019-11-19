@@ -46,25 +46,24 @@ const FourthScreen = props => {
     slidesToShow: 2.8,
     slidesToScroll: 1,
   };
-  const contentBlock = (
-    <div className="col-12">
-      <Slider {...sliderSettings}>
-        {
-          sliderContent.map((item, index) => (
-            <div key={index}>
-              <h3>{item.title}</h3>
-              <div className="price">От {item.price} ₴</div>
-              <a href={item.href}>Подробнее</a>
-            </div>
-          ))
-        }
-      </Slider>
-    </div>
-  );
   return (
     <div className={props.className}>
       {props.children}
-      <ScreenContent titleBlock={titleBlock} contentBlock={contentBlock} />
+      <ScreenContent titleBlock={titleBlock}>
+        <div className="col-12">
+          <Slider {...sliderSettings}>
+            {
+              sliderContent.map((item, index) => (
+                <div key={index}>
+                  <h3>{item.title}</h3>
+                  <div className="price">От {item.price} ₴</div>
+                  <a href={item.href}>Подробнее</a>
+                </div>
+              ))
+            }
+          </Slider>
+        </div>
+      </ScreenContent>
     </div>
   );
 }
