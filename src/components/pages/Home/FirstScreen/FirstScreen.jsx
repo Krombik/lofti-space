@@ -47,10 +47,7 @@ const FirstScreen = props => {
       </div>
     ),
     onReInit() {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      ref.current.parentElement.scrollTo(0, ref.current.offsetTop);
     }
   };
   return (
@@ -65,14 +62,6 @@ const FirstScreen = props => {
       </ScreenContent>
     </div>
   )
-};
-
-FirstScreen.propTypes = {
-  // bla: PropTypes.string,
-};
-
-FirstScreen.defaultProps = {
-  // bla: 'test',
 };
 
 const mapStateToProps = state => ({

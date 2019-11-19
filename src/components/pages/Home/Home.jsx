@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group'
 import ProgressDots from './ProgressDots'
 import FirstScreen from './FirstScreen';
 import SecondScreen from './SecondScreen';
@@ -14,18 +15,33 @@ class Home extends PureComponent {
     super(props);
 
     this.screens = [
-      <FirstScreen />,
-      <SecondScreen />,
-      <ThirdScreen />,
-      <FourthScreen />,
-      <FifthScreen />,
-      <SixthScreen />
+      FirstScreen,
+      SecondScreen,
+      ThirdScreen,
+      FourthScreen,
+      FifthScreen,
+      SixthScreen
     ];
   }
   render() {
     const { screenNumber } = this.props;
-    const Screen = this.screens[screenNumber].type;
-    return <Screen className="container"><ProgressDots screens={this.screens} /></Screen>;
+    return (
+      <>
+        {
+          this.screens.map((Screen, index) => (
+            <CSSTransition
+              timeout={500}
+              classNames="screen"
+              in={index !== screenNumber}
+            >
+              <Screen key={index} className={`container screen screen${index < screenNumber ? '__prev' : index > screenNumber ? '__next' : '__active'}`}>
+                <ProgressDots screens={this.screens} />
+              </Screen>
+            </CSSTransition>
+          ))
+        }
+      </>
+    );
   }
 }
 
