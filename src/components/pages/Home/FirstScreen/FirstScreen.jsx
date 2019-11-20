@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import sliderImgs from './slider-img'
 
 const FirstScreen = props => {
+
   const titleBlock = {
     className: 'col-md-6',
     h2: 'Комфортная среда Вашей работы',
@@ -53,16 +54,13 @@ const FirstScreen = props => {
     }
   };
   return (
-    <div className={props.className}>
-      {props.children}
-      <ScreenContent titleBlock={titleBlock}>
-        <div className="col-md-6">
-          <Slider {...sliderSettings}>
-            {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
-          </Slider>
-        </div>
-      </ScreenContent>
-    </div>
+    <ScreenContent titleBlock={titleBlock} {...props}>
+      <div className="col-md-6">
+        <Slider {...sliderSettings}>
+          {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
+        </Slider>
+      </div>
+    </ScreenContent>
   )
 };
 

@@ -8,20 +8,17 @@ const FifthScreen = props => {
     h2: 'Актуальные события'
   };
   return (
-    <div className={props.className}>
-      {props.children}
-      <ScreenContent isReverse={true} titleBlock={titleBlock}>
-        <div className="col-md-11">
-          {content.map((item, index) => (
-            <div key={index}>
-              <img src={item.img} alt=" " />
-              <div className="date">{item.date}</div>
-              <h4>{item.title}</h4>
-            </div>
-          ))}
-        </div>
-      </ScreenContent>
-    </div>
+    <ScreenContent isReverse={true} titleBlock={titleBlock} {...props}>
+      <div className="col-md-11">
+        {content.map((item, index) => (
+          <div key={index}>
+            <img src={item.img} alt=" " />
+            <div className="date">{item.date}</div>
+            <h4>{item.title}</h4>
+          </div>
+        ))}
+      </div>
+    </ScreenContent>
   );
 }
 

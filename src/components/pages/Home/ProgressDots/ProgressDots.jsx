@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { setScreenNumber } from '../../../../redux/app/actions'
-//import { Test } from './ProgressDots.styles';
+import './style.scss';
+import { ReactComponent as Logo } from './img/logo.svg'
 
 class ProgressDots extends PureComponent {
   onScreenChange(screenNumber) {
@@ -10,23 +11,24 @@ class ProgressDots extends PureComponent {
   }
 
   render() {
-    const { screens, screenNumber } = this.props;
-    const dots = screens.map((_, index) => {
+    const { screenCount, screenNumber } = this.props;
+    const dots = [];
+    for (let index = 0; index < screenCount; index++) {
       const isActive = index === screenNumber ? true : false;
-      return (
+      dots.push(
         <li
           key={index}
           className={isActive ? 'active' : null}
           onClick={() => { !isActive && this.onScreenChange(index) }}>
-          {index}
         </li>
       )
-    })
+    }
     return (
       <nav className="progress">
         <ul>
           {dots}
         </ul>
+        <Logo className="logo" />
       </nav>
     );
   }

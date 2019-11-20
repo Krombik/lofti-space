@@ -15,16 +15,13 @@ const ThirdScreen = props => {
     slidesToScroll: 1,
   };
   return (
-    <div className={props.className}>
-      {props.children}
-      <ScreenContent titleBlock={titleBlock}>
-        <div className="col-md-8">
-          <Slider {...sliderSettings}>
-            {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
-          </Slider>
-        </div>
-      </ScreenContent>
-    </div>
+    <ScreenContent titleBlock={titleBlock} {...props}>
+      <div className="col-md-8">
+        <Slider {...sliderSettings}>
+          {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
+        </Slider>
+      </div>
+    </ScreenContent>
   );
 }
 
