@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ScreenContent from '../ScreenContent'
 import Slider from "react-slick";
 import sliderImgs from './slider-img'
+import back1 from './img/back1.png'
+import './style.scss'
 
 const FirstScreen = props => {
 
@@ -13,11 +15,16 @@ const FirstScreen = props => {
     btn: 'ПОПРОБОВАТЬ БЕСПЛАТНО >'
   };
   const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState('auto');
 
   const ref = React.createRef();
 
   useEffect(() => {
-    setHeight(ref.current.offsetHeight * 5)
+    const el = ref.current;
+    const elSmallHeight = el.previousSibling !== null ? el.previousSibling.offsetHeight : el.nextSibling !== null ? el.nextSibling.offsetHeight : 0;
+    console.dir(el)
+    setHeight(el.offsetHeight + 4 * elSmallHeight);
+    setWidth(el.offsetHeight);
   }, [ref]);
 
   const sliderSettings = {
@@ -25,11 +32,12 @@ const FirstScreen = props => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    appendArrows: 'slick-list',
     appendDots(dots) {
       const left = this.currentSlide - 2 < 0 ? 0 : this.currentSlide - 2;
       return (
-        <div>
-          <ul style={{ maxHeight: height }}>
+        <div style={{ maxHeight: height, width }}>
+          <ul>
             {
               dots.map((Item, index) =>
                 index !== left ? Item : (<Item.type ref={ref} key={index} {...Item.props} />))
@@ -39,23 +47,23 @@ const FirstScreen = props => {
       )
     },
     customPaging: i => (
-      <div
-        style={{
-          width: "30px",
-          color: "blue",
-          border: "1px blue solid"
-        }}
-      >
-        {`${i < 9 ? '0' : ''}${i + 1}`}
+      <div>
+        <div>
+          {`${i < 9 ? '0' : ''}${i + 1}`}
+        </div>
       </div>
     ),
     onReInit() {
-      ref.current.parentElement.scrollTo(0, ref.current.offsetTop);
+      ref.current.parentElement.scrollTo({
+        left: 0,
+        top: ref.current.offsetTop,
+        behavior: 'smooth'
+      });
     }
   };
   return (
-    <ScreenContent titleBlock={titleBlock} {...props}>
-      <div className="col-md-6">
+    <ScreenContent titleBlock={titleBlock} background={back1} rightIsRed  {...props}>
+      <div className="col-md-4 first__slider">
         <Slider {...sliderSettings}>
           {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
         </Slider>

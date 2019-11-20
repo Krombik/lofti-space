@@ -9,6 +9,7 @@
     height: 100vh;
     text-transform: uppercase;
     pointer-events: none;
+    color: rgba($color: #000000, $alpha: .05);
 
     &__wrapper {
         transform: rotate(90deg);

@@ -26,6 +26,8 @@
 
     .logo {
         margin-top: 22.5px;
+        width: 12px;
+        height: 94px;
 
         path {
             fill: $colorGrey;
@@ -41,6 +43,22 @@
 
         &.active {
             background: $colorRedBlock;
+        }
+    }
+
+    .red__left & {
+        ul {
+            &::before {
+                background: #F6CED5;
+            }
+        }
+
+        li {
+            background: #fff;
+
+            &.active {
+                background: #F6CED5;
+            }
         }
     }
 }

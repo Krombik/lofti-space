@@ -1,0 +1,81 @@
+@import 'global/variables';
+
+.first {
+    &__screen {}
+
+    &__slider {
+        margin-left: auto;
+        padding-right: 0;
+
+        .slick {
+            &-slider {
+                color: #fff;
+
+                &::before {
+                    content: '';
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    left: 5.86vw;
+                    height: 100vh;
+                    width: 100vw;
+                    background: $colorRedBackgorund;
+                }
+            }
+
+            &-dots {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 106%;
+                width: auto;
+                margin: auto;
+
+                ul {
+                    height: 100%;
+                    overflow-y: hidden;
+                }
+
+                li {
+                    display: block;
+                    font-size: 18px;
+                    height: auto;
+                    width: auto;
+                    transition: .5s;
+                    margin: 0;
+
+                    &:not(:last-child) {
+                        >div>div {
+                            padding-bottom: 27.75px;
+                        }
+                    }
+
+                    &.slick-active {
+                        font-size: 30px;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            &-arrow {
+                background: #fff;
+                width: 2.93vw;
+                height: 2.93vw;
+                transform: none;
+                top: auto;
+                bottom: 0;
+                z-index: 9;
+            }
+
+            &-next {
+                left: 2.93vw;
+            }
+
+            &-prev {
+                left: 0;
+            }
+        }
+    }
+}

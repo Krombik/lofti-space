@@ -22,6 +22,7 @@ const Home = props => {
         screens.map((Screen, index) => (
           <Screen
             index={index}
+            key={index}
             screenCount={screens.length}
           />
         ))
