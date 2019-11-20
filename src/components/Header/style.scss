@@ -1,15 +1,127 @@
 /* your css code */
+@import 'global/variables';
+
 .header {
+    position: relative;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    >div {
+        display: inline-flex;
+        align-items: center;
+    }
 
     .lang-select {
         text-transform: uppercase;
         display: inline-block;
+        font-size: 15px;
+        font-weight: bold;
+        margin-right: 45px;
+
+        &__single-value {
+            transition: .5s;
+        }
     }
 
-    nav {
+    $lineHeight: 4px;
+
+    .burger {
+        position: relative;
+        height: 100%;
+        width: 37.5px;
+        height: 13px;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: $lineHeight;
+            margin: auto;
+            background: #000;
+            transition: top .2s .3s, transform .3s, background .5s;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            top: calc(100% - #{$lineHeight});
+        }
+    }
+
+    &.open {
+        color: #fff;
+
+        .burger {
+
+            &::before,
+            &::after {
+                top: calc(50% - #{$lineHeight/2});
+                background: #fff;
+                transition: top .2s, transform .3s .2s, background .5s;
+            }
+
+            &::before {
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    &__menu {
         position: absolute;
-        display: none;
+        z-index: 10;
+        right: -100%;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: $colorRedBlock;
+        transition: right .5s;
+        color: #fff;
+        font-size: 30px;
+        line-height: 36.75px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        ul {
+            li {
+                position: relative;
+                padding: 10px 0;
+
+                &:hover {
+                    &::after {
+                        width: 310px;
+                    }
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    transition: .3s;
+                    bottom: 0;
+                    left: 0;
+                    width: 195px;
+                    height: 2px;
+                    background: #fff;
+                }
+            }
+        }
+
+        &.open {
+            right: 0;
+        }
     }
 }

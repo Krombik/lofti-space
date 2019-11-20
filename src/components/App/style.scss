@@ -1,24 +1,31 @@
-$container-max-widths: (xl: 1920px);
-$grid-gutter-width: 190px;
-@import "../../../node_modules/bootstrap/scss/functions";
-@import "../../../node_modules/bootstrap/scss/variables";
-@import "../../../node_modules/bootstrap/scss/mixins";
-@import "../../../node_modules/bootstrap/scss/reboot";
-@import "../../../node_modules/bootstrap/scss/grid";
-@import "../../../node_modules/bootstrap/scss/utilities";
+@import 'global/variables';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
 
-$grid-padding: 80px;
+$grid-padding: 3.763vw;
+
+html {
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+}
 
 body {
     font-family: 'Montserrat';
     max-height: 100vh;
     height: 100vh;
-    overflow-y: hidden;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
-.container {
-    padding-right: $grid-padding;
-    padding-left: $grid-padding;
+#root {
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .screen {
@@ -63,9 +70,14 @@ body {
     }
 }
 
-.row {
-    margin-right: - $grid-padding;
-    margin-left: - $grid-padding;
+.row>div {
+    &:not(:first-child) {
+        padding-left: $grid-padding;
+    }
+
+    &:not(:last-child) {
+        padding-right: $grid-padding;
+    }
 }
 
 ul {
@@ -87,6 +99,24 @@ h2 {
     font-size: 60px;
     line-height: 72.75px;
     font-weight: bold;
+}
+
+a {
+    color: inherit;
+    text-decoration: none !important;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+input,
+button {
+    border: none;
+    outline: none !important;
+    background: none;
+    padding: 0;
+    margin: 0;
 }
 
 .btn {

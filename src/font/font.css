@@ -34,3 +34,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Latinka';
+    src: url('Latinka-Bold.eot');
+    src: url('Latinka-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Latinka-Bold.woff2') format('woff2'),
+        url('Latinka-Bold.woff') format('woff'),
+        url('Latinka-Bold.ttf') format('truetype'),
+        url('Latinka-Bold.svg#Latinka-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}

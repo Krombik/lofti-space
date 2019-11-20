@@ -4,14 +4,6 @@ import { setScreenNumber } from '../../../../redux/app/actions'
 //import { Test } from './ProgressDots.styles';
 
 class ProgressDots extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasError: false,
-    };
-  }
-
   onScreenChange(screenNumber) {
     const { setScreenNumber } = this.props;
     setScreenNumber(screenNumber);
@@ -39,14 +31,6 @@ class ProgressDots extends PureComponent {
     );
   }
 }
-
-ProgressDots.propTypes = {
-  // bla: PropTypes.string,
-};
-
-ProgressDots.defaultProps = {
-  // bla: 'test',
-};
 
 const mapStateToProps = state => ({
   screenNumber: state.app.screenNumber,

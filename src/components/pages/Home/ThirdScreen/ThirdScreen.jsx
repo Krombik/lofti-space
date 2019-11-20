@@ -20,7 +20,7 @@ const ThirdScreen = props => {
       <ScreenContent titleBlock={titleBlock}>
         <div className="col-md-8">
           <Slider {...sliderSettings}>
-            {sliderImgs.map((item, index) => (<img src={item} key={index} />))}
+            {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
           </Slider>
         </div>
       </ScreenContent>

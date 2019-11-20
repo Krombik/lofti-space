@@ -12,11 +12,13 @@ const FirstScreen = props => {
     btn: 'ПОПРОБОВАТЬ БЕСПЛАТНО >'
   };
   const [height, setHeight] = useState(0);
-  useEffect(() => {
-    setHeight(ref.current.offsetHeight * 5)
-  });
 
   const ref = React.createRef();
+
+  useEffect(() => {
+    setHeight(ref.current.offsetHeight * 5)
+  }, [ref]);
+
   const sliderSettings = {
     dots: true,
     speed: 500,
@@ -56,7 +58,7 @@ const FirstScreen = props => {
       <ScreenContent titleBlock={titleBlock}>
         <div className="col-md-6">
           <Slider {...sliderSettings}>
-            {sliderImgs.map((item, index) => (<img src={item} key={index} />))}
+            {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
           </Slider>
         </div>
       </ScreenContent>

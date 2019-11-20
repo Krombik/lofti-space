@@ -2,32 +2,21 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import './style.scss';
 import Home from '../pages/Home'
-import Header from '../Header'
+import Menu from '../Header/Menu'
 
 class App extends PureComponent {
   render() {
-    const { screenNumber } = this.props;
-    console.log(screenNumber)
     return (
-      <div className="root">
-        <Header />
+      <>
+        <Menu />
         <Home />
-      </div>
+      </>
     );
   }
 }
 
-App.propTypes = {
-  // bla: PropTypes.string,
-};
-
-App.defaultProps = {
-  // bla: 'test',
-};
-
 const mapStateToProps = state => ({
-  // blabla: state.blabla,
-  screenNumber: state.app.screenNumber,
+
 });
 
 const mapDispatchToProps = dispatch => ({

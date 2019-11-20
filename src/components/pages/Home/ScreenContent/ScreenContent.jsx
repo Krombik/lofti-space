@@ -9,7 +9,7 @@ const ScreenContent = props => {
         <div className={`${titleBlock.className} screen-title`}>
           <h2>{titleBlock.h2}</h2>
           {titleBlock.desc !== undefined && <div className={`${titleBlock.desc.length > 75 ? 'font-small' : 'font-normal'} desc`}>{titleBlock.desc}</div>}
-          {titleBlock.btn !== undefined && <a className="btn__red" href="">{titleBlock.btn}</a>}
+          {titleBlock.btn !== undefined && <a className="btn__red" href="/">{titleBlock.btn}</a>}
         </div>
       }
       {props.children}

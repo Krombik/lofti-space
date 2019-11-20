@@ -1,39 +1,28 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import './style.scss';
+import SideTitle from '../../SideTitle'
 
 class Menu extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasError: false,
-    };
-  }
-
   render() {
     const pages = ['Главная', 'Локации', 'Тарифы', 'О нас', 'События', 'Новости', 'Контакты', 'Условия'];
+    const { isMenuOpen } = this.props;
     return (
-      <nav>
-        <ul>
-          {pages.map((item, index) => (<li key={index}>{item}</li>))}
-        </ul>
+      <nav className={`header__menu${isMenuOpen ? ' open' : ''}`}>
+        <SideTitle title='menu' />
+        <div className="container">
+          <div className="row flex-row-reverse">
+            <ul className="col-md-4">
+              {pages.map((item, index) => (<li key={index}><a href="/">{item}</a></li>))}
+            </ul>
+          </div>
+        </div>
       </nav>
     );
   }
 }
 
-Menu.propTypes = {
-  // bla: PropTypes.string,
-};
-
-Menu.defaultProps = {
-  // bla: 'test',
-};
-
 const mapStateToProps = state => ({
-  // blabla: state.blabla,
+  isMenuOpen: state.app.isMenuOpen
 });
 
 const mapDispatchToProps = dispatch => ({
