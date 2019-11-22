@@ -34,16 +34,6 @@ body {
     padding-left: $gutterPadding;
 }
 
-.row>div {
-    &:not(:first-child) {
-        padding-left: $grid-padding;
-    }
-
-    &:not(:last-child) {
-        padding-right: $grid-padding;
-    }
-}
-
 ul {
     list-style: none;
     padding: 0;

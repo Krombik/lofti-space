@@ -37,7 +37,7 @@ const ScreenContent = props => {
         {sideTitle !== undefined && <SideTitle title={sideTitle.title} isRight={sideTitle.isRight} />}
         <div className="screen__wrapper">
           <div className="container">
-            <div className='row align-items-center'>
+            <div className='row align-items-center justify-content-between'>
               {isReverse && props.children}
               {titleBlock !== undefined &&
                 <div className={`${titleBlock.className} screen__title`}>
