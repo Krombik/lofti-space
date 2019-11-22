@@ -1,21 +1,35 @@
 @import 'src/global/variables';
 
-.first {
+.lofti {
     &__slider {
-        margin-left: auto;
-        padding-left: 0 !important;
+        padding-right: 0;
+
+        &__container {
+            position: relative;
+        }
 
         .slick {
             &-slider {
                 color: #fff;
-                padding-right: 20%;
+                padding-right: calc(20% - #{$grid-gutter-width/5});
+
+
+                img {
+                    max-height: 80vh;
+                    width: auto !important;
+                }
+            }
+
+            &-list {
+
+                max-height: 80vh;
             }
 
             &-dots {
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                right: 0;
+                right: $grid-gutter-width/2;
                 width: auto;
                 margin: auto;
 
@@ -26,7 +40,7 @@
 
                 li {
                     display: block;
-                    font-size: 18px;
+                    font-size: 24px;
                     height: auto;
                     width: auto;
                     transition: .5s;
@@ -34,12 +48,12 @@
 
                     &:not(:last-child) {
                         >div>div {
-                            padding-bottom: 27.75px;
+                            padding-bottom: 37px;
                         }
                     }
 
                     &.slick-active {
-                        font-size: 30px;
+                        font-size: 40px;
                         font-weight: bold;
                     }
                 }
@@ -53,7 +67,7 @@
                 display: flex;
                 bottom: 0;
                 left: 0;
-                width: 20%;
+                width: calc(20% + #{$grid-gutter-width/10});
             }
 
             &-arrow {

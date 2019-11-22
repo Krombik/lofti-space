@@ -2,6 +2,7 @@ import React from 'react';
 import ScreenContent from '../ScreenContent'
 import Slider from "react-slick";
 import sliderImgs from './slider-img'
+import './style.scss'
 
 const ThirdScreen = props => {
   const titleBlock = {
@@ -11,12 +12,12 @@ const ThirdScreen = props => {
   };
   const sliderSettings = {
     speed: 500,
-    slidesToShow: 2.8,
-    slidesToScroll: 1,
+    slidesToShow: 3,
+    slidesToScroll: 1
   };
   return (
     <ScreenContent titleBlock={titleBlock} {...props}>
-      <div className="col-md-8">
+      <div className="col-md-8 space__slider">
         <Slider {...sliderSettings}>
           {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
         </Slider>

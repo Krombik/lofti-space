@@ -11,7 +11,7 @@ const SecondScreen = props => {
     btn: 'Подробнее'
   };
   const opts = {
-    height: '435px',
+    height: '580px',
     width: '100%'
   };
   const sideTitle = {

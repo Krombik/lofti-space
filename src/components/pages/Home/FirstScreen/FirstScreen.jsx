@@ -69,11 +69,13 @@ const FirstScreen = props => {
   }
   return (
     <ScreenContent titleBlock={titleBlock} background={back1} sideBack={sideBack} sideTitle={sideTitle}  {...props}>
-      <div className="col-md-5 first__slider">
-        <Slider ref={slider} {...sliderSettings}>
-          {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
-        </Slider>
-        <SliderButtons slider={slider} />
+      <div className="col-md-5 lofti__slider">
+        <div className="lofti__slider__container">
+          <Slider ref={slider} {...sliderSettings}>
+            {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
+          </Slider>
+          <SliderButtons slider={slider} />
+        </div>
       </div>
     </ScreenContent>
   )

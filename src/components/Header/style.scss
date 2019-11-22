@@ -1,4 +1,3 @@
-/* your css code */
 @import 'src/global/variables';
 
 .header {
@@ -10,7 +9,7 @@
 
     position: absolute;
     width: 100%;
-    margin-top: 22.5px;
+    margin-top: 30px;
     z-index: 10;
     display: flex;
     justify-content: space-between;
@@ -24,9 +23,9 @@
     .lang-select {
         text-transform: uppercase;
         display: inline-block;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: bold;
-        margin-right: 45px;
+        margin-right: 60px;
 
         &__single-value {
             transition: .5s;
@@ -38,8 +37,8 @@
     .burger {
         position: relative;
         height: 100%;
-        width: 37.5px;
-        height: 13px;
+        width: 50px;
+        height: 17px;
 
         &::before,
         &::after {

@@ -50,8 +50,8 @@ h6 {
 }
 
 h2 {
-    font-size: 60px;
-    line-height: 72.75px;
+    font-size: 80px;
+    line-height: 97px;
     font-weight: bold;
 }
 
@@ -77,24 +77,26 @@ button {
     &__red {
         text-transform: uppercase;
         display: inline-flex;
-        width: 262.5px;
-        height: 60px;
+        width: 350px;
+        height: 80px;
         background: $colorRedBlock;
         justify-content: center;
         align-items: center;
         padding: 0 10px;
         color: #fff;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
 .font {
     &__normal {
-        font-size: 18px;
+        font-size: 24px;
+        line-height: 29px;
     }
 
     &__small {
-        font-size: 13.5px;
+        font-size: 18px;
+        line-height: 29px;
     }
 }

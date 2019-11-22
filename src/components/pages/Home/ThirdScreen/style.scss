@@ -1,0 +1,13 @@
+.space {
+    &__slider {
+        .slick {
+            &-list {
+                margin-right: -15%;
+            }
+
+            &-slide {
+                padding-right: 30px;
+            }
+        }
+    }
+}

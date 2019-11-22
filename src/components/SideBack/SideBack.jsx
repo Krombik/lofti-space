@@ -8,7 +8,11 @@ const SideBack = props => {
   const { isRight } = props.block;
   return (
     <div className={`container side-back ${isRight ? 'right' : 'left'}`}>
-      <div style={{ background: `linear-gradient(${isRight ? '-' : ''}90deg, ${color} ${percent}%, rgba(0,0,0,0.0001) ${percent}%)` }}></div>
+      <div className={`row${isRight ? ' flex-row-reverse' : ''}`}>
+        <div className={`col-md-${props.block.col}`}>
+          <div></div>
+        </div>
+      </div>
     </div>
   );
 }
