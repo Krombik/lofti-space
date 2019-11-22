@@ -6,7 +6,10 @@ import ScreenContent from '../ScreenContent'
 const SecondScreen = props => {
   const titleBlock = {
     className: 'col-md-5',
-    h2: 'О нас',
+    title: {
+      type: 'h2',
+      text: 'О нас'
+    },
     desc: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
     btn: 'Подробнее'
   };

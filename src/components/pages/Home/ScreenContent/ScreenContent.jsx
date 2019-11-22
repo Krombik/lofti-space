@@ -10,7 +10,6 @@ import './style.scss';
 
 const ScreenContent = props => {
   const {
-    titleBlock,
     isReverse,
     index,
     screenCount,
@@ -19,6 +18,7 @@ const ScreenContent = props => {
     background,
     sideTitle
   } = props;
+  const TitleBlock = props.titleBlock;
   const classNames = ['screen', `screen${index < screenNumber ? '__prev' : index > screenNumber ? '__next' : '__active'}`]
   if (sideBack !== undefined)
     if (sideBack.isRight) classNames.push('red__right');
@@ -39,11 +39,11 @@ const ScreenContent = props => {
           <div className="container">
             <div className='row align-items-center justify-content-between'>
               {isReverse && props.children}
-              {titleBlock !== undefined &&
-                <div className={`${titleBlock.className} screen__title`}>
-                  <h2>{titleBlock.h2}</h2>
-                  {titleBlock.desc !== undefined && <div className={`font__${titleBlock.desc.length > 75 ? 'small' : 'normal'} desc`}>{titleBlock.desc}</div>}
-                  {titleBlock.btn !== undefined && <a className="btn__red" href="/">{titleBlock.btn}</a>}
+              {TitleBlock !== undefined &&
+                <div className={`${TitleBlock.className} screen__title`}>
+                  <TitleBlock.title.type>{TitleBlock.title.text}</TitleBlock.title.type>
+                  {TitleBlock.desc !== undefined && <div className={`font__${TitleBlock.desc.length > 75 ? 'small' : 'normal'} desc`}>{TitleBlock.desc}</div>}
+                  {TitleBlock.btn !== undefined && <a className="btn btn__red" href="/">{TitleBlock.btn}</a>}
                 </div>
               }
               {!isReverse && props.children}

@@ -1,13 +1,83 @@
 .space {
     &__slider {
+
         .slick {
             &-list {
                 margin-right: -15%;
+                max-height: 80vh;
             }
 
             &-slide {
-                padding-right: 30px;
+                padding-right: 40px;
+
+                >div {
+                    position: relative;
+                }
+
+                img {
+                    height: auto;
+                    width: 100%;
+                }
             }
+        }
+
+        &__content {
+            position: absolute;
+            opacity: 0;
+            transition: .5s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            bottom: 0;
+            left: 0;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            padding: 40px 30px;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                z-index: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(204, 12, 46, .8);
+            }
+
+            &::after {
+                content: attr(data-index);
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 80px;
+                line-height: 97px;
+                font-weight: bold;
+            }
+
+            >* {
+                position: relative;
+            }
+
+            .name {
+                line-height: 100%;
+                text-transform: uppercase;
+
+                &::after {
+                    content: '';
+                    display: block;
+                    margin: 20px 0 40px;
+                    width: 100%;
+                    height: 3px;
+                    background: #fff;
+                }
+            }
+
         }
     }
 }

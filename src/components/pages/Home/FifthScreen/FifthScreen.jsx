@@ -5,7 +5,10 @@ import content from './slider-img'
 const FifthScreen = props => {
   const titleBlock = {
     className: 'col-md-10',
-    h2: 'Актуальные события'
+    title: {
+      type: 'h3',
+      text: 'Актуальные события'
+    }
   };
   return (
     <ScreenContent isReverse={true} titleBlock={titleBlock} {...props}>
