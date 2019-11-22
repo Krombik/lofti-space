@@ -39,24 +39,26 @@ class Header extends PureComponent {
       }),
     }
     return (
-      <div className="header__wrapper">
-        <header className={`header${this.props.isMenuOpen ? ' open' : ''}`}>
-          <img src={logo} alt="" className="logo" />
-          <div>
-            <Select
-              options={options}
-              defaultValue={options[0]}
-              isSearchable={false}
-              styles={selectStyle}
-              className="lang-select"
-              classNamePrefix="lang-select"
-              hideSelectedOptions={true}
-              isClearable={false}
-              onChange={this.onLangChange}
-            />
-            <button className='burger' onClick={this.onBurgerClick}></button>
-          </div>
-        </header>
+      <div className="container">
+        <div className="header__wrapper">
+          <header className={`header${this.props.isMenuOpen ? ' open' : ''}`}>
+            <img src={logo} alt="" className="logo" />
+            <div>
+              <Select
+                options={options}
+                defaultValue={options[0]}
+                isSearchable={false}
+                styles={selectStyle}
+                className="lang-select"
+                classNamePrefix="lang-select"
+                hideSelectedOptions={true}
+                isClearable={false}
+                onChange={this.onLangChange}
+              />
+              <button className='burger' onClick={this.onBurgerClick}></button>
+            </div>
+          </header>
+        </div>
       </div>
     );
   }

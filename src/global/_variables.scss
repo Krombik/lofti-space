@@ -1,0 +1,126 @@
+$container-max-widths: (xl: 1920px);
+$grid-gutter-width: 0px;
+$gutterPadding: 60px;
+$colorGrey: #787878;
+$colorRedBlock: #d00d2f;
+$colorRedBackgorund: #d6304d;
+
+$pi: 3.14159265359;
+$_precision: 10;
+
+@function pow($base, $exp) {
+    $value: $base;
+
+    @if $exp>1 {
+        @for $i from 2 through $exp {
+            $value: $value * $base;
+        }
+    }
+
+    @if $exp < 1 {
+        @for $i from 0 through -$exp {
+            $value: $value / $base;
+        }
+    }
+
+    @return $value;
+}
+
+@function fact($num) {
+    $fact: 1;
+
+    @if $num>0 {
+        @for $i from 1 through $num {
+            $fact: $fact * $i;
+        }
+    }
+
+    @return $fact;
+}
+
+@function _to_unitless_rad($angle) {
+    @if unit($angle)=="deg" {
+        $angle: $angle / 180deg * $pi;
+    }
+
+    @if unit($angle)=="rad" {
+        $angle: $angle / 1rad;
+    }
+
+    @return $angle;
+}
+
+@function sin($angle) {
+    $a: _to_unitless_rad($angle);
+    $sin: $a;
+
+    @for $n from 1 through $_precision {
+        $sin: $sin + (pow(-1, $n) / fact(2 * $n + 1)) * pow($a, (2 * $n + 1));
+    }
+
+    @return $sin;
+}
+
+@function cos($angle) {
+    $a: _to_unitless_rad($angle);
+    $cos: 1;
+
+    @for $n from 1 through $_precision {
+        $cos: $cos + (pow(-1, $n) / fact(2*$n)) * pow($a, 2*$n);
+    }
+
+    @return $cos;
+}
+
+@function tan($angle) {
+    @return sin($angle) / cos($angle);
+}
+
+@mixin arrowContainer($arrowWidth, $arrowHeight, $color) {
+    display: block;
+
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: $arrowHeight;
+        width: $arrowWidth;
+        background: $color;
+    }
+}
+
+@mixin arrowDraw($arrowWidth, $arrowHeight, $type, $deg: 45deg) {
+
+    $step: sin(45deg)*$arrowWidth/2 - sin(45deg)*$arrowHeight/2;
+
+    @if $type=='right' {
+        &::after {
+            transform: translateY(- $step) rotate($deg)
+        }
+
+        &::before {
+            transform: translateY($step) rotate(- $deg)
+        }
+    }
+
+    @if $type=='left' {
+        &::after {
+            transform: translateY(- $step) rotate(- $deg)
+        }
+
+        &::before {
+            transform: translateY($step) rotate($deg)
+        }
+    }
+
+}
+
+:export {
+    colorRedBackgorund: $colorRedBackgorund
+}

@@ -1,0 +1,21 @@
+@import 'src/global/variables';
+
+.side-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    &.left {
+        background: linear-gradient(90deg, $colorRedBackgorund $gutterPadding, rgba(0, 0, 0, 0.0001) $gutterPadding);
+    }
+
+    &.right {
+        background: linear-gradient(-90deg, $colorRedBackgorund $gutterPadding, rgba(0, 0, 0, 0.0001) $gutterPadding);
+    }
+
+    >div {
+        height: 100%;
+    }
+}

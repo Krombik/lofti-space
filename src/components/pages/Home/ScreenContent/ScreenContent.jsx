@@ -2,16 +2,27 @@ import React from 'react';
 
 import Header from '../../../Header'
 import ProgressDots from '../ProgressDots'
+import SideTitle from '../../../SideTitle'
+import SideBack from '../../../SideBack'
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import './style.scss';
 
 const ScreenContent = props => {
-  const { titleBlock, isReverse, index, screenCount, screenNumber, rightIsRed, leftIsRed, background, className } = props;
-  console.log(background)
-  const classNames = ['container', className, 'screen', `screen${index < screenNumber ? '__prev' : index > screenNumber ? '__next' : '__active'}`]
-  if (rightIsRed) classNames.push('red__right');
-  if (leftIsRed) classNames.push('red__left');
+  const {
+    titleBlock,
+    isReverse,
+    index,
+    screenCount,
+    screenNumber,
+    sideBack,
+    background,
+    sideTitle
+  } = props;
+  const classNames = ['screen', `screen${index < screenNumber ? '__prev' : index > screenNumber ? '__next' : '__active'}`]
+  if (sideBack !== undefined)
+    if (sideBack.isRight) classNames.push('red__right');
+    else classNames.push('red__left');
   return (
     <CSSTransition
       key={index}
@@ -22,16 +33,21 @@ const ScreenContent = props => {
       <div className={classNames.join(' ')} {...background !== undefined ? { style: { backgroundImage: `url("${background}")` } } : {}}>
         <Header />
         <ProgressDots screenCount={screenCount} />
+        {sideBack !== undefined && <SideBack block={sideBack} />}
+        {sideTitle !== undefined && <SideTitle title={sideTitle.title} isRight={sideTitle.isRight} />}
         <div className="screen__wrapper">
-          <div className={`${isReverse ? 'flex-row-reverse ' : ''}row align-items-center`}>
-            {titleBlock !== undefined &&
-              <div className={`${titleBlock.className} screen__title`}>
-                <h2>{titleBlock.h2}</h2>
-                {titleBlock.desc !== undefined && <div className={`font__${titleBlock.desc.length > 75 ? 'small' : 'normal'} desc`}>{titleBlock.desc}</div>}
-                {titleBlock.btn !== undefined && <a className="btn__red" href="/">{titleBlock.btn}</a>}
-              </div>
-            }
-            {props.children}
+          <div className="container">
+            <div className='row align-items-center'>
+              {isReverse && props.children}
+              {titleBlock !== undefined &&
+                <div className={`${titleBlock.className} screen__title`}>
+                  <h2>{titleBlock.h2}</h2>
+                  {titleBlock.desc !== undefined && <div className={`font__${titleBlock.desc.length > 75 ? 'small' : 'normal'} desc`}>{titleBlock.desc}</div>}
+                  {titleBlock.btn !== undefined && <a className="btn__red" href="/">{titleBlock.btn}</a>}
+                </div>
+              }
+              {!isReverse && props.children}
+            </div>
           </div>
         </div>
       </div>

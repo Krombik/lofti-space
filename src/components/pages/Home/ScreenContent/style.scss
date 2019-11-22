@@ -2,6 +2,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     transition: top .5s;
     height: 0;
     overflow: hidden;
@@ -24,13 +25,9 @@
     }
 
     &__wrapper {
+        display: flex;
         height: 100%;
-        position: relative;
-
-        >div {
-            height: 100%;
-            width: 100%;
-        }
+        align-items: center;
     }
 
     &-enter {

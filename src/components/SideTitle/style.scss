@@ -1,35 +1,15 @@
 .side-title {
     font-family: 'Latinka';
-    font-weight: bold;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
     width: 100%;
     height: 100vh;
-    text-transform: uppercase;
     pointer-events: none;
-    color: rgba($color: #000000, $alpha: .05);
-
-    &__wrapper {
-        transform: rotate(90deg);
-    }
-
-    &__container {
-        width: 100vh;
-        height: 100vw;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-
-        span {
-            transform: scale(-1.33333);
-            line-height: 76%;
-            margin-bottom: 60px;
-        }
-    }
+    filter: opacity(0.05);
 
     .header__menu & {
-        color: rgba(255, 255, 255, 0.1);
+        filter: invert(100%) opacity(0.1);
     }
 }

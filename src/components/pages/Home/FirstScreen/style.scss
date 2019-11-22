@@ -1,35 +1,21 @@
-@import 'global/variables';
+@import 'src/global/variables';
 
 .first {
-    &__screen {}
-
     &__slider {
         margin-left: auto;
-        padding-right: 0;
+        padding-left: 0 !important;
 
         .slick {
             &-slider {
                 color: #fff;
-
-                &::before {
-                    content: '';
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    margin: auto;
-                    left: 5.86vw;
-                    height: 100vh;
-                    width: 100vw;
-                    background: $colorRedBackgorund;
-                }
+                padding-right: 20%;
             }
 
             &-dots {
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                left: 106%;
+                right: 0;
                 width: auto;
                 margin: auto;
 
@@ -59,22 +45,37 @@
                 }
             }
 
+            $arrowWidth: 15px;
+            $arrowHeight: 3px;
+
+            &-arows {
+                position: absolute;
+                display: flex;
+                bottom: 0;
+                left: 0;
+                width: 20%;
+            }
+
             &-arrow {
                 background: #fff;
-                width: 2.93vw;
-                height: 2.93vw;
+                position: relative;
+                width: 50%;
+                height: 100%;
                 transform: none;
+                @include arrowContainer($arrowWidth, $arrowHeight, $colorRedBlock);
                 top: auto;
                 bottom: 0;
                 z-index: 9;
+                left: 0;
+                right: 0;
             }
 
             &-next {
-                left: 2.93vw;
+                @include arrowDraw($arrowWidth, $arrowHeight, 'right')
             }
 
             &-prev {
-                left: 0;
+                @include arrowDraw($arrowWidth, $arrowHeight, 'left')
             }
         }
     }

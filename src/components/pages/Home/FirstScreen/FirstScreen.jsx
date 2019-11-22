@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import ScreenContent from '../ScreenContent'
 import Slider from "react-slick";
+import SliderButtons from './SliderButtons'
 import sliderImgs from './slider-img'
 import back1 from './img/back1.png'
 import './style.scss'
@@ -15,16 +16,13 @@ const FirstScreen = props => {
     btn: 'ПОПРОБОВАТЬ БЕСПЛАТНО >'
   };
   const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState('auto');
 
-  const ref = React.createRef();
-
+  const ref = useRef(null);
+  const slider = useRef(null);
   useEffect(() => {
     const el = ref.current;
     const elSmallHeight = el.previousSibling !== null ? el.previousSibling.offsetHeight : el.nextSibling !== null ? el.nextSibling.offsetHeight : 0;
-    console.dir(el)
     setHeight(el.offsetHeight + 4 * elSmallHeight);
-    setWidth(el.offsetHeight);
   }, [ref]);
 
   const sliderSettings = {
@@ -32,11 +30,11 @@ const FirstScreen = props => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    appendArrows: 'slick-list',
+    arrows: false,
     appendDots(dots) {
       const left = this.currentSlide - 2 < 0 ? 0 : this.currentSlide - 2;
       return (
-        <div style={{ maxHeight: height, width }}>
+        <div style={{ maxHeight: height }}>
           <ul>
             {
               dots.map((Item, index) =>
@@ -61,12 +59,21 @@ const FirstScreen = props => {
       });
     }
   };
+  const sideTitle = {
+    title: 'lofti',
+    isRight: true
+  }
+  const sideBack = {
+    col: 4,
+    isRight: true
+  }
   return (
-    <ScreenContent titleBlock={titleBlock} background={back1} rightIsRed  {...props}>
-      <div className="col-md-4 first__slider">
-        <Slider {...sliderSettings}>
+    <ScreenContent titleBlock={titleBlock} background={back1} sideBack={sideBack} sideTitle={sideTitle}  {...props}>
+      <div className="col-md-5 first__slider">
+        <Slider ref={slider} {...sliderSettings}>
           {sliderImgs.map((item, index) => (<img alt="" src={item} key={index} />))}
         </Slider>
+        <SliderButtons slider={slider} />
       </div>
     </ScreenContent>
   )
