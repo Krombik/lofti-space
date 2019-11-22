@@ -14,8 +14,15 @@ const SecondScreen = props => {
     height: '435px',
     width: '100%'
   };
+  const sideTitle = {
+    title: 'about us',
+    isRight: true
+  }
+  const sideBack = {
+    col: 5
+  }
   return (
-    <ScreenContent isReverse={true} titleBlock={titleBlock} {...props}>
+    <ScreenContent isReverse={true} titleBlock={titleBlock} sideBack={sideBack} sideTitle={sideTitle} {...props}>
       <div className="col-md-6">
         <YouTube
           videoId="2g811Eo7K8U"

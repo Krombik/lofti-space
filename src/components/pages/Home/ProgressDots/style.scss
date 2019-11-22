@@ -54,10 +54,16 @@
         }
 
         li {
-            background: #fff;
+            background: #F6CED5;
 
             &.active {
-                background: #F6CED5;
+                background: #fff;
+            }
+        }
+
+        .logo {
+            path {
+                fill: #F6CED5;
             }
         }
     }
