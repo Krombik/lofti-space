@@ -44,5 +44,15 @@
                 }
             }
         }
+
+        &.white {
+            .slick-arrow {
+
+                &::before,
+                &::after {
+                    background: rgba(255, 255, 255, 1);
+                }
+            }
+        }
     }
 }

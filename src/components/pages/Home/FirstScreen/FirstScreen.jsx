@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import ScreenContent from '../ScreenContent'
 import Slider from "react-slick";
-import SliderButtons from './SliderButtons'
+import SliderButtons from '../../../SliderButtons'
 import sliderImgs from './slider-img'
 import back1 from './img/back1.png'
 import './style.scss'
@@ -71,7 +71,7 @@ const FirstScreen = props => {
     isRight: true
   }
   return (
-    <ScreenContent titleBlock={titleBlock} background={back1} sideBack={sideBack} sideTitle={sideTitle}  {...props}>
+    <ScreenContent titleBlock={titleBlock} background={back1} sideBack={sideBack} sideTitle={sideTitle} {...props}>
       <div className="col-md-5 lofti__slider">
         <div className="lofti__slider__container">
           <Slider ref={slider} {...sliderSettings}>

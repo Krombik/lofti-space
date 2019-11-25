@@ -6,10 +6,9 @@ const SliderButtons = props => {
   const [height, setHeight] = useState('auto');
   useLayoutEffect(() => {
     const updateSize = () => {
-      const width = button.current.offsetWidth / 2;
-      setHeight(width % 2 === 0 ? width + 1 : width);
+      setHeight(button.current.offsetWidth / 2);
     }
-    updateSize();
+    if (height === 'auto') updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, [height]);
@@ -20,11 +19,9 @@ const SliderButtons = props => {
       props.slider.current.slickPrev();
   }
   return (
-    <div className="col-1 slider__arrows">
-      <div className="slick-arows" ref={button} style={{ height }}>
-        <button onClick={() => arrowClick('prev')} className='slick-arrow slick-prev'></button>
-        <button onClick={() => arrowClick('next')} className='slick-arrow slick-next'></button>
-      </div>
+    <div className="slick-arows" ref={button} style={{ height }}>
+      <button onClick={() => arrowClick('prev')} className='slick-arrow slick-prev'></button>
+      <button onClick={() => arrowClick('next')} className='slick-arrow slick-next'></button>
     </div>
   );
 }

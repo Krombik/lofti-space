@@ -12,6 +12,7 @@ const ScreenContent = props => {
   const {
     isReverse,
     index,
+    align,
     screenCount,
     screenNumber,
     sideBack,
@@ -37,8 +38,7 @@ const ScreenContent = props => {
         {sideTitle !== undefined && <SideTitle title={sideTitle.title} isRight={sideTitle.isRight} />}
         <div className="screen__wrapper">
           <div className="container">
-            <div className='row align-items-center justify-content-between'>
-              {isReverse && props.children}
+            <div className={`row align-items-center justify-content-${align} ${isReverse ? 'flex-row-reverse' : ''}`}>
               {TitleBlock !== undefined &&
                 <div className={`${TitleBlock.className} screen__title`}>
                   <TitleBlock.title.type>{TitleBlock.title.text}</TitleBlock.title.type>
@@ -46,7 +46,7 @@ const ScreenContent = props => {
                   {TitleBlock.btn !== undefined && <a className="btn btn__red" href="/">{TitleBlock.btn}</a>}
                 </div>
               }
-              {!isReverse && props.children}
+              {props.children}
             </div>
           </div>
         </div>
@@ -54,6 +54,10 @@ const ScreenContent = props => {
     </CSSTransition>
   );
 }
+
+ScreenContent.defaultProps = {
+  align: 'between'
+};
 
 const mapStateToProps = state => ({
   screenNumber: state.app.screenNumber,

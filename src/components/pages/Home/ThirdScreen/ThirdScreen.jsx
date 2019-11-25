@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import ScreenContent from '../ScreenContent'
+import ScreenContent from '../ScreenContent';
 import Slider from "react-slick";
-import SliderButtons from '../../../SliderButtons'
-import sliderImgs from './slider-img'
-import './style.scss'
+import SliderButtons from '../../../SliderButtons';
+import sliderImgs from './slider-img';
+import './style.scss';
 
 const ThirdScreen = props => {
   const slider = useRef(null);
@@ -17,9 +17,12 @@ const ThirdScreen = props => {
   };
   const sliderSettings = {
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    infinite: false,
+    arrows: false,
+    variableWidth: true,
+    focusOnSelect: true
   };
   const sideTitle = {
     title: 'space'
@@ -30,18 +33,20 @@ const ThirdScreen = props => {
         <Slider ref={slider} {...sliderSettings}>
           {
             sliderImgs.map((item, index) => (
-              <>
+              <div key={index}>
                 <img alt="" src={item.img} key={index} />
                 <div className="space__slider__content" data-index={`${index < 10 ? '0' : ''}${index + 1}`}>
                   <h4 className="name" dangerouslySetInnerHTML={{ __html: item.name.replace(' ', '<br />') }}></h4>
                   <a className="btn" href={item.href}>перейти ></a>
                 </div>
-              </>
+              </div>
             ))
           }
         </Slider>
       </div>
-      <SliderButtons slider={slider} />
+      <div className="col-1 slider__arrows">
+        <SliderButtons slider={slider} />
+      </div>
     </ScreenContent>
   );
 }

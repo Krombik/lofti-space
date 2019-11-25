@@ -1,8 +1,9 @@
-import React from 'react';
-import ScreenContent from '../ScreenContent'
+import React, { useRef, useLayoutEffect, useState } from 'react';
+import ScreenContent from '../ScreenContent';
+import SliderButtons from '../../../SliderButtons';
 import Slider from "react-slick";
 import { connect } from 'react-redux';
-//import { Test } from './FourthScreen.styles';
+import './style.scss';
 
 const FourthScreen = props => {
   const titleBlock = {
@@ -16,53 +17,82 @@ const FourthScreen = props => {
     {
       title: 'Дневной пропуск',
       price: 300,
-      href: '#'
+      href: '/'
     },
     {
       title: 'Недельный пропуск',
       price: 1000,
-      href: '#'
+      href: '/'
     },
     {
       title: 'Месячный абонемент',
       price: 3500,
-      href: '#'
+      href: '/'
     },
     {
       title: 'Абонемент на 3 месяца',
       price: 9975,
-      href: '#'
+      href: '/'
     },
     {
       title: 'Абонемент на 3 месяца',
       price: 9975,
-      href: '#'
+      href: '/'
     },
     {
       title: 'Абонемент на 3 месяца',
       price: 9975,
-      href: '#'
+      href: '/'
     }
   ];
   const sliderSettings = {
     speed: 500,
-    slidesToShow: 2.8,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    infinite: false,
+    arrows: false,
+    variableWidth: true,
+    focusOnSelect: true
   };
+  const sideTitle = {
+    title: 'tariffs',
+    isRight: true
+  }
+  const sideBack = {
+    col: 2,
+    isRight: true
+  }
+  const targetRef = useRef(null);
+  const slider = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  useLayoutEffect(() => {
+    const updateSize = () => {
+      setContainerWidth(targetRef.current.parentElement.offsetWidth);
+    }
+    if (containerWidth === 0) updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, [containerWidth]);
+  const slideWIdth = containerWidth / 4;
   return (
-    <ScreenContent titleBlock={titleBlock} {...props}>
-      <div className="col-12">
-        <Slider {...sliderSettings}>
+    <ScreenContent titleBlock={titleBlock} sideBack={sideBack} sideTitle={sideTitle}  {...props}>
+      <div ref={targetRef} className="col-12 tariffs__slider">
+        <Slider ref={slider} {...sliderSettings}>
           {
             sliderContent.map((item, index) => (
-              <div key={index}>
-                <h3>{item.title}</h3>
-                <div className="price">От {item.price} ₴</div>
-                <a href={item.href}>Подробнее</a>
+              <div className="tariffs__slide" key={index} style={{ width: slideWIdth }} >
+                <div>
+                  <h4>{item.title}</h4>
+                  <div className="price font__normal">От <span className="h4">{item.price}</span></div>
+                  <a className="btn" href={item.href}>Подробнее</a>
+                </div>
               </div>
             ))
           }
         </Slider>
+      </div>
+      <div className="col-1 slider__arrows white">
+        <SliderButtons slider={slider} />
       </div>
     </ScreenContent>
   );
