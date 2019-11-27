@@ -1,0 +1,65 @@
+@import 'src/global/variables';
+
+.contacts {
+    background: $colorRedBackgorund;
+
+    &__map {
+        >div {
+            width: calc(100% + #{$gutterPadding});
+        }
+    }
+
+    &__container {
+        position: absolute;
+        left: 0;
+        background: #fff;
+        padding: 60px 15px;
+        display: flex;
+        justify-content: center;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    &__contact {
+        span {
+            display: block;
+            color: $colorRedBlock;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            li {
+                &:not(:last-child)::after {
+                    content: ',\00a0';
+                }
+
+                &:not(:first-child) {
+                    display: inline-block;
+                }
+            }
+        }
+
+        margin-bottom: 40px;
+    }
+
+    &__links {
+        color: $colorRedBlock;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: bold;
+
+        >a {
+            display: inline-block;
+            margin: 0 0 40px;
+
+            &:not(:last-child) {
+                margin-right: 49px;
+            }
+        }
+    }
+}

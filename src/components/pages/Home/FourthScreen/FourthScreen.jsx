@@ -75,7 +75,7 @@ const FourthScreen = props => {
   }, [containerWidth]);
   const slideWIdth = containerWidth / 4;
   return (
-    <ScreenContent titleBlock={titleBlock} sideBack={sideBack} sideTitle={sideTitle}  {...props}>
+    <ScreenContent titleBlock={titleBlock} sideBack={sideBack} sideTitle={sideTitle} {...props}>
       <div ref={targetRef} className="col-12 tariffs__slider">
         <Slider ref={slider} {...sliderSettings}>
           {

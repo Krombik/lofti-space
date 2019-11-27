@@ -17,13 +17,15 @@ const ScreenContent = props => {
     screenNumber,
     sideBack,
     background,
-    sideTitle
+    sideTitle,
+    className
   } = props;
   const TitleBlock = props.titleBlock;
   const classNames = ['screen', `screen${index < screenNumber ? '__prev' : index > screenNumber ? '__next' : '__active'}`]
   if (sideBack !== undefined)
     if (sideBack.isRight) classNames.push('red__right');
     else classNames.push('red__left');
+  if (className !== undefined) classNames.push(className);
   return (
     <CSSTransition
       key={index}
