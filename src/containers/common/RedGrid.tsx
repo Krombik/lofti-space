@@ -60,6 +60,11 @@ const RedGrid = memo(
       );
       const handleResize = () => {
         if (ctx && container && item) {
+          console.log(
+            window
+              .getComputedStyle(ctx.canvas)
+              .getPropertyValue("--gridSpacing-t")
+          );
           const height = document.documentElement.clientHeight;
           const width = document.documentElement.clientWidth;
           ctx.canvas.height = height;
@@ -68,12 +73,13 @@ const RedGrid = memo(
           if (!t) return;
           const { size, right, position } = t[1];
           ctx.fillStyle = theme.palette.secondary.main;
+          const canvasCss = window.getComputedStyle(ctx.canvas);
           const backgroundWidth =
             size !== 12
               ? Math.round(
                   (container.offsetWidth * (size - 6)) / 12 +
-                    width / 2 +
-                    parseInt(window.getComputedStyle(container).marginLeft, 10)
+                    width / 2 -
+                    parseInt(canvasCss.getPropertyValue("--gridSpacing-l"), 10)
                 )
               : width;
           ctx.fillRect(
@@ -82,8 +88,15 @@ const RedGrid = memo(
             backgroundWidth,
             !position
               ? height
-              : item.offsetHeight -
-                  parseInt(window.getComputedStyle(item).paddingTop, 10)
+              : item.offsetHeight +
+                  item.offsetTop -
+                  parseInt(canvasCss.getPropertyValue("--gridSpacing-t"), 10) /
+                    2 -
+                  parseInt(
+                    canvasCss.getPropertyValue("--containerGutter-t"),
+                    10
+                  ) -
+                  parseInt(canvasCss.getPropertyValue("--headerHeight"), 10)
           );
         }
       };

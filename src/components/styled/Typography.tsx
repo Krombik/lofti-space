@@ -23,6 +23,11 @@ export const TYPOGRAPHY = {
     lg: { fontSize: "24px" },
     func: { margin: spacingFunc },
   },
+  body2: {
+    xs: { fontSize: "14px" },
+    lg: { fontSize: "18px" },
+    func: { margin: spacingFunc },
+  },
 };
 
 const Typography = styled(MuiTypography)`

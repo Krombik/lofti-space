@@ -10,6 +10,12 @@ const responsiveHeaderColor = makeResponsive(
   `
 );
 
+const responsiveHeaderFontSize = makeResponsive(
+  (_, value: number) => css`
+    font-size: ${value}px;
+  `
+)({ xs: 11, md: 20 });
+
 export const HEADER_HEIGHT_BREAKPOINTS = { md: 16, xs: 8 };
 
 const responsiveHeaderHeightVariables = makeResponsiveVariables(
@@ -31,6 +37,9 @@ const Header = styled.header<Props>`
   padding-bottom: 0;
   ${({ colorBreakpoints }: Props) => responsiveHeaderColor(colorBreakpoints)}
   ${responsiveHeaderHeightVariables}
+  * {
+    ${responsiveHeaderFontSize}
+  }
   > div {
     height: var(--headerHeight);
     button {

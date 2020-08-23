@@ -11,7 +11,7 @@ export const LAYOUT_GUTTER = {
   lg: { t: 6, l: 16 },
 };
 export const LAYOUT_SPACING = {
-  xs: { t: 4, l: 2 },
+  xs: { t: 3, l: 6 },
   lg: { t: 12, l: 8 },
 };
 

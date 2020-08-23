@@ -1,5 +1,4 @@
 import React, { FC, memo } from "react";
-import Grid from "@material-ui/core/Grid";
 import "styled-components/macro";
 import { Link } from "react-router-dom";
 import LangSelect from "./LangSelect";
@@ -7,8 +6,11 @@ import Burger from "./Burger";
 import StyledHeader from "components/styled/Header";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { RedBreakpointsProps } from "containers/common/RedGrid";
+import Grid from "components/styled/Grid";
 
 type Props = { menu: boolean };
+
+const HEADER_BUTTONS_SPACING = { xs: { t: 3, l: 3 }, md: { t: 6, l: 6 } };
 
 const Header: FC<Props & RedBreakpointsProps> = memo(
   ({ menu, redBreakpoints }) => (
@@ -47,7 +49,7 @@ const Header: FC<Props & RedBreakpointsProps> = memo(
         <Grid
           item
           container
-          spacing={6}
+          spacingBreakpoints={HEADER_BUTTONS_SPACING}
           xs={!menu}
           justify="flex-end"
           alignItems="center"
