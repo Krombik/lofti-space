@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React blog app
 
-## Available Scripts
+> ### React codebase containing examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) API.
 
-In the project directory, you can run:
+## Getting started
 
-### `npm start`
+To get the frontend running locally:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Clone this repo
+- `npm install` to install all dependencies
+- `npm run start` to start the local server
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Making requests to the backend API
 
-### `npm test`
+You can view [the API spec here](https://github.com/GoThinkster/productionready/blob/master/api) which contains all routes & responses for the server.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The source code for the backend server (available for Node, Rails and Django) can be found in the [main RealWorld repo](https://github.com/gothinkster/realworld).
 
-### `npm run build`
+## Functionality overview
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The example application is a social blogging site. It uses a custom API for all requests, including authentication.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**General functionality:**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Authenticate users via JWT (login/register modal/page + logout button in header)
+- CRU\* users (sign up & settings modals/pages - no deleting required)
+- CRUD Articles
+- CR\*D Comments on articles (no updating required)
+- GET and display paginated lists of articles
+- Favorite articles
+- Follow other users
 
-### `npm run eject`
+**The general page breakdown looks like this:**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Every page has same layout:
+  - Header component:
+    - Site logo (link to home page)
+    - Sing in/up (opens sign in/up modal) buttons for unauthorized user
+    - New post (opens editor modal), user profile (link to profile of current user) and logout buttons for authorized user
+    - Site settings button
+      - Switch between dark/light theme (stored in localstorage)
+      - Select of articles count per page (stored in localstorage)
+  - Page component
+  - Modal component
+  - ErrorAlert component
+- Home page (URL: /)
+  - Tabs with list of articles
+    - Feed of current user (only shown to authorized user)
+    - Global (last articles)
+    - Tabs opened by user, can be closed and dragged (stored in localstorage)
+    - Add new tab (by tag) button
+  - List of articles previews by current tab, every item contains:
+    - Author avatar (link to author profile)
+    - Author username (link to author profile)
+    - Date the article was created or edited
+    - Like button (disabled for unauthorized user)
+    - Likes count
+    - Title
+    - Description
+    - Read more button (opens article modal and change url to article page)
+    - List of tags (each element is a link to a tag tab)
+  - Pagination and load more button for list of articles (displayed only if the number of pages exceeds 1)
+- User (profile) page (URL: /user/{username})
+  - User avatar
+  - Username
+  - User settings (only shown to current user)
+  - Subscribe button (shown only to non-current user and disabled for unauthorized user)
+  - User bio
+  - Tabs with list of articles:
+    - Last articles of user
+    - User's favorite articles
+  - List of articles previews by current tab (same as at home page)
+- Article page/modal (URL: /articles/{slug})
+  - Article title
+  - Like button (disabled for unauthorized user)
+  - Likes count
+  - Delete/Edit article buttons (only shown to article's author)
+  - Article text (with markdown render)
+  - Comment section
+    - Comments count
+    - New comment section (only shown to authorized user)
+      - Textarea
+      - Submit button
+    - Comments list
+      - Comment text
+      - Comment author avatar (link to author profile)
+      - Comment author username (link to author profile)
+      - Comment post date
+      - Delete comment (only shown to comment's author)
+- Sign in (URL: /login) & sign up (URL: /register) modals/pages
+  - Use JWT (stored in localstorage)
+- Settings (URL: /settings) modal/page
+  - Edit user info (change email, username, bio, image, password)
+- Editor modal/page to create (URL: /new) or edit (URL: /articles/{slug}/edit) articles
+  - Stored changing data at localstorage until edit/create or reset button will be pressed
+  - Every item in tag list is editable, removable and draggle (drag make no sense because api)
