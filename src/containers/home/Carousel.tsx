@@ -14,7 +14,6 @@ type Props = {
 export const StyledCarousel = styled(Slider)`
   height: 100%;
   width: 100%;
-  position: relative;
   box-shadow: 0 40px 60px rgba(0, 0, 0, 0.2);
   .slick {
     &-list {
@@ -39,14 +38,13 @@ export const StyledCarousel = styled(Slider)`
   }
 `;
 
-const Carousel = forwardRef<Slider, Props & RedBreakpointsProps>(
-  ({ content, beforeChange, redBreakpoints }, sliderRef) => (
+const Carousel = forwardRef<Slider, Props>(
+  ({ content, beforeChange }, sliderRef) => (
     <StyledCarousel
       infinite={false}
       ref={sliderRef}
       beforeChange={beforeChange}
-      prevArrow={<ArrowButton redBreakpoints={redBreakpoints} />}
-      nextArrow={<ArrowButton redBreakpoints={redBreakpoints} next />}
+      arrows={false}
     >
       {content.map((item, index) => (
         <img key={index} src={item.src} alt={item.alt} />

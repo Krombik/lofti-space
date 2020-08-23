@@ -10,6 +10,7 @@ import CarouselPagination, {
   StyledCarouselPagination,
 } from "./CarouselPagination";
 import { useMediaQuery, Theme } from "@material-ui/core";
+import CarouselButtonsContainer from "./CarouselButtonsContainer";
 
 type Props = {
   content: Img[];
@@ -61,6 +62,12 @@ const CarouselContainer: FC<Props & RedGridProps> = ({
         }, 0);
       }
     : undefined;
+  const handleNextSlide = () => {
+    slider.current?.slickNext();
+  };
+  const handlePrevSlide = () => {
+    slider.current?.slickPrev();
+  };
   return (
     <RedGrid
       item
@@ -72,13 +79,13 @@ const CarouselContainer: FC<Props & RedGridProps> = ({
       css={`
         height: 100%;
         width: 100%;
+        position: relative;
         ${({ lg }: RedGridProps) =>
           responsiveContainer({ lg } as BreakpointObj<number>)}
       `}
     >
       <Carousel
         content={content}
-        redBreakpoints={redBreakpoints}
         beforeChange={handleSliderChange}
         ref={slider}
       />
@@ -89,6 +96,11 @@ const CarouselContainer: FC<Props & RedGridProps> = ({
           ref={pagination}
         />
       )}
+      <CarouselButtonsContainer
+        redBreakpoints={redBreakpoints}
+        onNextSlide={handleNextSlide}
+        onPrevSlide={handlePrevSlide}
+      />
     </RedGrid>
   );
 };
