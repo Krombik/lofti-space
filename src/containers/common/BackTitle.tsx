@@ -1,13 +1,21 @@
 import React, { useRef, FC, useEffect } from "react";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
+import makeResponsive from "utils/makeResponsive";
+
+const responsiveHeight = makeResponsive(
+  (_, value: number) =>
+    css`
+      width: ${value}%;
+      height: ${value}%;
+    `
+)({ xs: 62, md: 100 });
 
 const StyledCanvas = styled.canvas`
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  right: 0;
   z-index: -1;
+  ${responsiveHeight}
 `;
 
 type Props = { title: string; right?: boolean };

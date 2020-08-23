@@ -1,20 +1,26 @@
 import React, { forwardRef } from "react";
 import { Img } from "types";
 import "styled-components/macro";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import Slider from "react-slick";
-import ArrowButton from "./ArrowButton";
-import { RedBreakpointsProps } from "containers/common/RedGrid";
+import makeResponsive from "utils/makeResponsive";
 
 type Props = {
   content: Img[];
   beforeChange?: (oldIndex: number, newIndex: number) => void;
 };
 
+const responsiveShadow = makeResponsive(
+  (_, value: [number, number]) =>
+    css`
+      box-shadow: 0 ${value[0]}px ${value[1]}px rgba(0, 0, 0, 0.2);
+    `
+)({ xs: [10, 30], md: [40, 60] });
+
 export const StyledCarousel = styled(Slider)`
   height: 100%;
   width: 100%;
-  box-shadow: 0 40px 60px rgba(0, 0, 0, 0.2);
+  ${responsiveShadow}
   .slick {
     &-list {
       height: 100%;

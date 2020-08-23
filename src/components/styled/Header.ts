@@ -33,10 +33,6 @@ const Header = styled.header<Props>`
   ${responsiveHeaderHeightVariables}
   > div {
     height: var(--headerHeight);
-    img {
-      height: 100%;
-      width: auto;
-    }
     button {
       padding: 0;
       min-width: 0;

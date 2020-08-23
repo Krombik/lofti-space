@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
-import { State } from "types";
+import { State, ThemeProps } from "types";
 import "styled-components/macro";
 import Slide from "@material-ui/core/Slide";
 import Layout from "components/common/Layout";
@@ -9,7 +9,6 @@ import Grid from "components/styled/Grid";
 import { MENU_TRANSITION_DURATION } from "utils/constant";
 import MenuLink from "components/styled/MenuLink";
 import RedGrid from "containers/common/RedGrid";
-import Typography from "components/styled/Typography";
 
 const selectData = createSelector(
   (state: State) => state.common.menu,
@@ -52,11 +51,18 @@ const Menu: FC = () => {
           title="menu"
           justify="flex-end"
           redBreakpoints={RED_BREAKPOINTS}
-          css={`
-            height: 100%;
-          `}
         >
-          <RedGrid redBreakpoints={RED_BREAKPOINTS} item lg={4} md={6}>
+          <RedGrid
+            redBreakpoints={RED_BREAKPOINTS}
+            item
+            lg={4}
+            md={6}
+            css={`
+              ${({ theme }: ThemeProps) => `${theme.breakpoints.down("md")} {
+                width: 100%;
+              }`}
+            `}
+          >
             <Grid
               container
               spacingBreakpoints={{ lg: { t: 6, l: 6 }, xs: { t: 3, l: 3 } }}

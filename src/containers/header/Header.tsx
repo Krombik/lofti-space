@@ -33,6 +33,10 @@ const Header: FC<Props & RedBreakpointsProps> = memo(
               a {
                 display: inline-flex;
               }
+              img {
+                height: 100%;
+                width: auto;
+              }
             `}
           >
             <Link to="/">

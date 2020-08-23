@@ -44,7 +44,7 @@ const MenuLink = styled(_MenuLink)`
     content: "";
     display: block;
     position: absolute;
-    bottom: 0;
+    bottom: 3px;
     left: 0;
     height: 3px;
     background: currentColor;
