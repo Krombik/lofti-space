@@ -12,7 +12,6 @@ import GlobalStyle from "components/styled/GlobalStyles";
 
 const App: FC = () => {
   const theme = useMemo(() => makeTheme(), []);
-  console.log(theme.breakpoints, theme.breakpoints.between("md", "md"));
   return (
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>

@@ -11,12 +11,11 @@ import ReactPlayer from "react-player";
 import "styled-components/macro";
 import makeResponsive from "utils/makeResponsive";
 import { css } from "styled-components/macro";
-import ArrowIcon from "icons/Arrow";
 import PlayButtonIcon from "icons/PlayButtonIcon";
 
 const RED_BREAKPOINTS: RedBreakpoints = {
   lg: { size: 5 },
-  sm: { size: 5, position: "top" },
+  sm: { size: 6 },
   xs: { size: 9, position: "top" },
 };
 
@@ -58,16 +57,24 @@ const AboutUs: FC = memo(() => {
           ПОДРОБНЕЕ
         </Button>
       </Grid>
-      <RedGrid item container sm={6} redBreakpoints={RED_BREAKPOINTS}>
+      <RedGrid
+        item
+        container
+        alignContent="center"
+        sm={7}
+        lg={6}
+        redBreakpoints={RED_BREAKPOINTS}
+        css={`
+          height: 100%;
+          ${responsiveHeight}
+        `}
+      >
         <ReactPlayer
           url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-          height="100vh"
+          height="100%"
           width="100%"
           light
           playIcon={<PlayButtonIcon />}
-          css={`
-            ${responsiveHeight}
-          `}
         />
       </RedGrid>
     </Layout>

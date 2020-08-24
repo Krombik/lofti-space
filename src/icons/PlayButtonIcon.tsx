@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { ThemeProps } from "types";
 import "styled-components/macro";
 
 const PlayButtonIcon: FC = () => (
@@ -13,7 +12,7 @@ const PlayButtonIcon: FC = () => (
     <path
       d="M20,0H130a20,20,0,0,1,20,20V80a20,20,0,0,1-20,20H20A20,20,0,0,1,0,80V20A20,20,0,0,1,20,0Z"
       css={`
-        fill: ${({ theme }: ThemeProps) => theme.palette.secondary.main};
+        fill: var(--red);
       `}
     />
     <path

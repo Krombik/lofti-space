@@ -18,12 +18,6 @@ const makeTheme = () =>
         fontSize: undefined,
         lineHeight: 1.2125,
       },
-      overline: {
-        fontSize: "40px",
-        lineHeight: 1.225,
-        fontWeight: "bold",
-        textTransform: "inherit",
-      },
       body1: {
         fontSize: undefined,
         lineHeight: 1.2,
@@ -38,9 +32,8 @@ const makeTheme = () =>
       primary: {
         main: "#d00d2f",
       },
-      secondary: {
-        main: "#D6304D",
-      },
+      background: { default: "#F8F8F8", paper: "#fff" },
+      text: { primary: "#000" },
     },
     overrides: {
       MuiButton: {

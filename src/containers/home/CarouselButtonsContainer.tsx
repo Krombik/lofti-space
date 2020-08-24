@@ -35,9 +35,8 @@ const StyledCarouselButtonsContainerWrapper = styled.div`
 
 const StyledCarouselButtonsContainer = styled.div<RedGridProps>`
   ${({ redBreakpoints }) => responsiveArrowButtonSize(redBreakpoints)}
-  background: ${({ theme }: ThemeProps) => theme.palette.common.white};
-  box-shadow: -0.2px 0 0 0 ${({ theme }: ThemeProps) =>
-    theme.palette.common.white};
+  background: var(--white);
+  box-shadow: -0.2px 0 0 0 var(--white);
 `;
 
 type Props = { onPrevSlide: () => void; onNextSlide: () => void };
@@ -46,15 +45,13 @@ const CarouselButtonsContainer: FC<RedGridProps & Props> = ({
   redBreakpoints,
   onNextSlide,
   onPrevSlide,
-}) => {
-  return (
-    <StyledCarouselButtonsContainerWrapper>
-      <StyledCarouselButtonsContainer redBreakpoints={redBreakpoints}>
-        <ArrowButton onClick={onPrevSlide} />
-        <ArrowButton onClick={onNextSlide} next />
-      </StyledCarouselButtonsContainer>
-    </StyledCarouselButtonsContainerWrapper>
-  );
-};
+}) => (
+  <StyledCarouselButtonsContainerWrapper>
+    <StyledCarouselButtonsContainer redBreakpoints={redBreakpoints}>
+      <ArrowButton onClick={onPrevSlide} />
+      <ArrowButton onClick={onNextSlide} next />
+    </StyledCarouselButtonsContainer>
+  </StyledCarouselButtonsContainerWrapper>
+);
 
 export default CarouselButtonsContainer;

@@ -14,16 +14,7 @@ const HEADER_BUTTONS_SPACING = { xs: { t: 3, l: 3 }, md: { t: 6, l: 6 } };
 
 const Header: FC<Props & RedBreakpointsProps> = memo(
   ({ menu, redBreakpoints }) => (
-    <StyledHeader
-      colorBreakpoints={Object.fromEntries(
-        Object.keys(redBreakpoints).map((item) => [
-          item,
-          redBreakpoints[item as Breakpoint]!.position === "item" ||
-            (redBreakpoints[item as Breakpoint]!.size !== 12 &&
-              !redBreakpoints[item as Breakpoint]!.right),
-        ])
-      )}
-    >
+    <StyledHeader redBreakpoints={redBreakpoints}>
       <Grid container>
         {!menu && (
           <Grid

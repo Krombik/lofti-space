@@ -5,6 +5,8 @@ import Container from "../styled/Container";
 import BackTitle from "containers/common/BackTitle";
 import { RedBreakpointsProps } from "containers/common/RedGrid";
 import Grid, { GridProps } from "components/styled/Grid";
+import Navigation from "containers/common/Navigation";
+import { NavigationType } from "types";
 
 export const LAYOUT_GUTTER = {
   xs: { t: 3, l: 7 },
@@ -30,6 +32,7 @@ const Layout: FC<Props & GridProps<"div"> & RedBreakpointsProps> = ({
 }) => (
   <Container maxWidth="xl" gutterBreakpoints={LAYOUT_GUTTER}>
     <Header menu={menu} redBreakpoints={redBreakpoints} />
+    {!menu && <Navigation redBreakpoints={redBreakpoints} />}
     <div
       css={`
         height: 100%;

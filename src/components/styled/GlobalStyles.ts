@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
   }
   :root {
     ${responsiveTypographyVariables}
+    --primary: ${({ theme }: ThemeProps) => theme.palette.primary.main};
+    --red: #D6304D;
+    --pink: #F6CED5;
+    --grey: #707070;
+    --white: #fff;
+    --black: #000;
   }
 `;
 

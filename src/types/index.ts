@@ -4,6 +4,7 @@ import { Actions } from "./actions";
 import { Theme } from "@material-ui/core";
 import { ThemeProps as GenericThemeProps } from "styled-components/macro";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+import { FC } from "react";
 
 export type BreakpointObj<T> = {
   [key in Breakpoint]?: T;
@@ -23,3 +24,5 @@ export type XOR<T, U> = T | U extends object
 export type ThemeProps = GenericThemeProps<Theme>;
 
 export type Img = { src: string; alt: string };
+
+export type NavigationType = { path: string; Component: FC };

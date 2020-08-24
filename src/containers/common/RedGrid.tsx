@@ -28,7 +28,7 @@ const RedBackground = styled.canvas`
   width: 100vw;
   z-index: -1;
   & + ${Grid} {
-    color: ${({ theme }: ThemeProps) => theme.palette.common.white};
+    color: var(--white);
   }
 `;
 
@@ -41,7 +41,6 @@ const RedGrid = memo(
     const theme = useTheme();
     useEffect(() => {
       const ctx = canvas.current?.getContext("2d");
-      const container = canvas.current?.parentElement;
       const item = canvas.current?.nextElementSibling as HTMLElement;
       const breakpoints = theme.breakpoints.keys.reduceRight<
         [number, ResponsiveRedGrid][]
@@ -59,12 +58,7 @@ const RedGrid = memo(
         []
       );
       const handleResize = () => {
-        if (ctx && container && item) {
-          console.log(
-            window
-              .getComputedStyle(ctx.canvas)
-              .getPropertyValue("--gridSpacing-t")
-          );
+        if (ctx && item) {
           const height = document.documentElement.clientHeight;
           const width = document.documentElement.clientWidth;
           ctx.canvas.height = height;
@@ -72,16 +66,24 @@ const RedGrid = memo(
           const t = breakpoints.find((item) => item[0] < width);
           if (!t) return;
           const { size, right, position } = t[1];
-          ctx.fillStyle = theme.palette.secondary.main;
           const canvasCss = window.getComputedStyle(ctx.canvas);
-          const backgroundWidth =
-            size !== 12
-              ? Math.round(
-                  (container.offsetWidth * (size - 6)) / 12 +
-                    width / 2 -
-                    parseInt(canvasCss.getPropertyValue("--gridSpacing-l"), 10)
-                )
-              : width;
+          ctx.fillStyle = canvasCss.getPropertyValue("--red");
+          let backgroundWidth = width;
+          if (size !== 12) {
+            const gutterWidth = parseInt(
+              canvasCss.getPropertyValue("--containerGutter-l"),
+              10
+            );
+            const spacingWidth = parseInt(
+              canvasCss.getPropertyValue("--gridSpacing-l"),
+              10
+            );
+            backgroundWidth = Math.round(
+              ((width - gutterWidth * 2 + spacingWidth) * size) / 12 +
+                gutterWidth -
+                spacingWidth
+            );
+          }
           ctx.fillRect(
             right ? width - backgroundWidth : 0,
             position !== "item" ? 0 : item.offsetTop,
