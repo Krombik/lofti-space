@@ -1,18 +1,13 @@
 import styled, { css } from "styled-components";
 import makeResponsive from "utils/makeResponsive";
-import { BreakpointObj } from "types";
 import makeResponsiveVariables from "utils/makeResponsiveVariables";
 import { spacingFunc } from "./Container";
 import { RedGridProps, ResponsiveRedGrid } from "containers/common/RedGrid";
 
-// redBreakpoints[item as Breakpoint]!.position === "item" ||
-//   (redBreakpoints[item as Breakpoint]!.size !== 12 &&
-//     !redBreakpoints[item as Breakpoint]!.right)
-
 const responsiveHeaderColor = makeResponsive(
   (_, value: ResponsiveRedGrid) => css`
     color: var(
-      --${value.position === "item" || value.size !== 12 || value.right ? "black" : "white"}
+      --${value.position === "item" || (value.size !== 12 && !value.right) ? "black" : "white"}
     );
   `
 );

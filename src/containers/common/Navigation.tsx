@@ -41,8 +41,7 @@ const Navigation: FC<RedBreakpointsProps> = ({ redBreakpoints }) => {
         direction="column"
         wrap="nowrap"
         css={`
-          height: 100%;
-          left: 0;
+          height: calc(100% + var(--gridSpacing-t));
           width: var(--containerGutter-l);
         `}
       >
