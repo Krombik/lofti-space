@@ -3,8 +3,8 @@ import { css, FlattenInterpolation } from "styled-components";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 type Mixin<P, T> = (
-  props: P,
   value: T,
+  props: P,
   breakpoint: Breakpoint
 ) => string | FlattenInterpolation<ThemeProps>;
 
@@ -21,7 +21,7 @@ const makeResponsive = <Props, T>(mixin: Mixin<Props & ThemeProps, T>) => (
             ? props.theme.breakpoints.values[breakpoints[index + 1]] - 0.05
             : "xl"
         )} {
-          ${mixin(props, responsive[breakpoint] as T, breakpoint)}
+          ${mixin(responsive[breakpoint] as T, props, breakpoint)}
         }
       `
     );

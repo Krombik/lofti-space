@@ -4,15 +4,14 @@ import { Link } from "react-router-dom";
 import LangSelect from "./LangSelect";
 import Burger from "./Burger";
 import StyledHeader from "components/styled/Header";
-import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { RedBreakpointsProps } from "containers/common/RedGrid";
 import Grid from "components/styled/Grid";
 
 type Props = { menu: boolean };
 
-const HEADER_BUTTONS_SPACING = { xs: { t: 3, l: 3 }, md: { t: 6, l: 6 } };
+const HEADER_BUTTONS_SPACING = { xs: { t: 0, l: 3 }, md: { t: 0, l: 6 } };
 
-const Header: FC<Props & RedBreakpointsProps> = memo(
+const Header: FC<Props & Partial<RedBreakpointsProps>> = memo(
   ({ menu, redBreakpoints }) => (
     <StyledHeader redBreakpoints={redBreakpoints}>
       <Grid container>
@@ -27,8 +26,8 @@ const Header: FC<Props & RedBreakpointsProps> = memo(
                 display: inline-flex;
               }
               img {
-                height: 100%;
-                width: auto;
+                height: var(--headerHeight);
+                width: var(--headerHeight);
               }
             `}
           >

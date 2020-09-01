@@ -12,13 +12,13 @@ import VerticalLogo from "components/navigation/VerticalLogo";
 const NAVIGATION_SPACING = { xs: { t: 2, l: 0 }, md: { t: 6, l: 0 } };
 
 const responsiveColor = makeResponsive(
-  (_, value: ResponsiveRedGrid) => css`
+  (value: ResponsiveRedGrid) => css`
     color: var(--${value.right ? "grey" : "pink"});
     --active-color: var(--${value.right ? "primary" : "white"});
   `
 );
 
-const Navigation: FC<RedBreakpointsProps> = ({ redBreakpoints }) => {
+const Navigation: FC<Partial<RedBreakpointsProps>> = ({ redBreakpoints }) => {
   const location = useLocation();
   const currPageIndex = pages.findIndex(
     (item) => item.path === location.pathname
@@ -32,7 +32,7 @@ const Navigation: FC<RedBreakpointsProps> = ({ redBreakpoints }) => {
         top: 0;
         padding: var(--containerGutter-t) 0;
         height: 100%;
-        ${responsiveColor(redBreakpoints)}
+        ${responsiveColor(redBreakpoints || { xs: { right: true, size: 0 } })}
       `}
     >
       <Grid

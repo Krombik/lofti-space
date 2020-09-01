@@ -17,7 +17,7 @@ type VariableBreakpointObj<P> = BreakpointObj<Value<P>> & {
   func?: Func<P>;
 };
 
-type TrueProps<P> = Omit<P, "theme"> & ThemeProps;
+type PropsWithTheme<P> = Omit<P, "theme"> & ThemeProps;
 
 const objToCssVariable = <Props>(
   props: Props,
@@ -48,7 +48,7 @@ const objToCssVariable = <Props>(
 
 const makeResponsiveVariables = <P>(
   obj: {
-    [key: string]: VariableBreakpointObj<TrueProps<P>>;
+    [key: string]: VariableBreakpointObj<PropsWithTheme<P>>;
   },
   global?: boolean,
   prefix = ""
@@ -68,7 +68,7 @@ const makeResponsiveVariables = <P>(
     }),
     {}
   );
-  return (props: TrueProps<P>) =>
+  return (props: PropsWithTheme<P>) =>
     props.theme.breakpoints.keys
       .filter((breakpoint) => responsive[breakpoint] !== undefined)
       .reduce(

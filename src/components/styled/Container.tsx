@@ -1,24 +1,21 @@
-import React, { FC } from "react";
-import MuiContainer, { ContainerProps } from "@material-ui/core/Container";
 import styled from "styled-components/macro";
 import makeResponsiveVariables from "utils/makeResponsiveVariables";
 import { ThemeProps, BreakpointObj } from "types";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 export type SpacingBreakpoints = BreakpointObj<{ t: number; l: number }>;
 
 type ResponsiveGutterProps = {
   gutterBreakpoints: SpacingBreakpoints;
+  maxWidth?: Breakpoint;
 };
 
 export const spacingFunc = (spacing: number, { theme }: ThemeProps) =>
   `${theme.spacing(spacing)}px`;
 
-const _Container: FC<ContainerProps & ResponsiveGutterProps> = ({
-  gutterBreakpoints,
-  ...props
-}) => <MuiContainer {...props} />;
-
-const Container = styled(_Container)`
+const Container = styled.div<ResponsiveGutterProps>`
+  ${({ maxWidth, theme }: ResponsiveGutterProps & ThemeProps) =>
+    maxWidth && `max-width: ${theme.breakpoints.values[maxWidth]}px;`}
   ${({ gutterBreakpoints }) =>
     makeResponsiveVariables({
       containerGutter: {
@@ -27,7 +24,8 @@ const Container = styled(_Container)`
       },
     })}
   padding: var(--containerGutter-t) var(--containerGutter-l);
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
 
 export default Container;

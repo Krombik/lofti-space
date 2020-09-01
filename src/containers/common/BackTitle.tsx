@@ -3,17 +3,17 @@ import styled, { css } from "styled-components/macro";
 import makeResponsive from "utils/makeResponsive";
 
 const responsiveHeight = makeResponsive(
-  (_, value: number) =>
+  (value: number) =>
     css`
       width: ${value}%;
       height: ${value}%;
     `
 )({ xs: 62, md: 100 });
 
-const StyledCanvas = styled.canvas`
+const StyledCanvas = styled.canvas<{ right?: boolean }>`
   position: absolute;
   top: 0;
-  right: 0;
+  ${({ right }) => (right ? "right" : "left")}: 0;
   z-index: -1;
   ${responsiveHeight}
 `;
@@ -52,7 +52,7 @@ const BackTitle: FC<Props> = ({ title, right }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [title, right]);
-  return <StyledCanvas ref={canvas} />;
+  return <StyledCanvas ref={canvas} right={right} />;
 };
 
 export default BackTitle;

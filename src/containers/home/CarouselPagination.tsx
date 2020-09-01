@@ -1,26 +1,31 @@
 import React, { forwardRef } from "react";
-import { Img, ThemeProps } from "types";
+import { ImgType, ThemeProps } from "types";
 import styled from "styled-components/macro";
 import Slider from "react-slick";
-import { TYPOGRAPHY } from "components/styled/Typography";
+import indexToTwoDigit from "utils/indexToTwoDigit";
 
 type Props = {
-  content: Img[];
+  content: ImgType[];
   beforeChange?: () => void;
 };
 
-export const StyledCarouselPagination = styled(Slider)`
+const StyledCarouselPagination = styled(Slider)`
   .slick {
+    &-list {
+      width: calc(100% + var(--containerGutter-l));
+      padding-right: var(--containerGutter-l);
+    }
     &-slide {
       height: calc(
-        var(--h3-fontSize) + var(--h3-margin) / 2 -
-          (var(--h3-fontSize) - var(--body1-fontSize)) / 4
+        var(--h3) + ${({ theme }: ThemeProps) => theme.spacing(8)}px -
+          (var(--h3) - var(--body1)) / 4
       );
+      width: 100% !important;
       > div {
         position: relative;
         top: 50%;
         line-height: 1;
-        font-size: calc(var(--body1-fontSize) * 2);
+        font-size: calc(var(--body1) * 2);
         font-weight: bold;
         transform: translateY(-50%) scale(0.5);
         display: flex;
@@ -29,6 +34,7 @@ export const StyledCarouselPagination = styled(Slider)`
         transition: ${({ theme }: ThemeProps) =>
           theme.transitions.create(["font-size"])};
         > div {
+          color: var(--white);
           width: auto !important;
           transform: translateX(50%);
           cursor: pointer;
@@ -36,7 +42,7 @@ export const StyledCarouselPagination = styled(Slider)`
       }
     }
     &-current > div {
-      font-size: calc(var(--h3-fontSize) * 2);
+      font-size: calc(var(--h3) * 2);
     }
   }
 `;
@@ -56,7 +62,7 @@ const CarouselPagination = forwardRef<Slider, Props>(
       beforeChange={beforeChange}
     >
       {content.map((_, index) => (
-        <div key={index}>{`${index < 9 ? 0 : ""}${index + 1}`}</div>
+        <div key={index}>{indexToTwoDigit(index)}</div>
       ))}
     </StyledCarouselPagination>
   )

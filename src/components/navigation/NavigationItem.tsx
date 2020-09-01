@@ -1,19 +1,8 @@
 import React, { FC } from "react";
 import Grid from "components/styled/Grid";
 import { Link, LinkProps } from "react-router-dom";
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
 import { GridProps } from "@material-ui/core";
-import makeResponsive from "utils/makeResponsive";
-
-const responsiveSize = makeResponsive(
-  (_, size: number) => css`
-    height: ${size}px;
-    width: ${size}px;
-  `
-)({
-  xs: 7,
-  md: 16,
-});
 
 type Props = { isCurrent: boolean; height: number; path: string };
 
@@ -37,7 +26,8 @@ const StyledNavigationItem = styled(_Grid)`
 `;
 
 const StyledNavigationLink = styled(_Link)`
-  ${responsiveSize}
+  height: 16px;
+  width: 16px;
   color: ${({ isCurrent }) => (isCurrent ? "var(--active-color)" : "inherit")};
   ${({ isCurrent }) => isCurrent && "pointer-events: none;"}
   background: currentColor;

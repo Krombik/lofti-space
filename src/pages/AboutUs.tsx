@@ -12,6 +12,8 @@ import "styled-components/macro";
 import makeResponsive from "utils/makeResponsive";
 import { css } from "styled-components/macro";
 import PlayButtonIcon from "icons/PlayButtonIcon";
+import { shadowMixin } from "utils/mixins";
+import PageInfo from "components/common/PageInfo";
 
 const RED_BREAKPOINTS: RedBreakpoints = {
   lg: { size: 5 },
@@ -30,7 +32,7 @@ const JUSTIFY_BREAKPOINTS: JustifyBreakpoints = {
 };
 
 const responsiveHeight = makeResponsive(
-  (_, value: string) =>
+  (value: string) =>
     css`
       max-height: ${value};
     `
@@ -46,16 +48,21 @@ const AboutUs: FC = memo(() => {
       justifyBreakpoints={JUSTIFY_BREAKPOINTS}
     >
       <Grid item sm={5}>
-        <Typography variant="h1">О нас</Typography>
-        <Typography variant="body2">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo.
-        </Typography>
-        <Button variant="contained" color="primary">
-          ПОДРОБНЕЕ
-        </Button>
+        <PageInfo
+          button={
+            <Button variant="contained" color="primary">
+              ПОДРОБНЕЕ
+            </Button>
+          }
+        >
+          <Typography variant="h1">О нас</Typography>
+          <Typography variant="body2">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+          </Typography>
+        </PageInfo>
       </Grid>
       <RedGrid
         item
@@ -75,6 +82,7 @@ const AboutUs: FC = memo(() => {
           width="100%"
           light
           playIcon={<PlayButtonIcon />}
+          css={shadowMixin}
         />
       </RedGrid>
     </Layout>

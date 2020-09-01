@@ -1,12 +1,22 @@
 import React, { FC } from "react";
 import Grid from "components/styled/Grid";
 import "styled-components/macro";
+import makeResponsive from "utils/makeResponsive";
+import { css } from "styled-components/macro";
+
+const responsiveFontSize = makeResponsive(
+  (value: number) =>
+    css`
+      font-size: ${value}px;
+    `
+)({ xs: 7, md: 14 });
 
 const VerticalLogo: FC = ({ children }) => (
   <Grid
     item
     css={`
-      display: table;
+      display: grid;
+      flex-direction: column;
       transform: translateX(50%);
     `}
   >
@@ -26,6 +36,8 @@ const VerticalLogo: FC = ({ children }) => (
           white-space: nowrap;
           text-transform: uppercase;
           font-weight: bold;
+          line-height: 1 !important;
+          ${responsiveFontSize}
         `}
       >
         {children}

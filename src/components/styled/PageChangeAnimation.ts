@@ -5,6 +5,7 @@ import { PAGE_TRANSITION_DURATION } from "utils/constant";
 type PageChangeAnimationProps = { isMore: boolean };
 
 const PageChangeAnimation = styled.div<PageChangeAnimationProps>`
+  height: 100%;
   .enter,
   .exit {
     position: fixed;
@@ -32,7 +33,7 @@ const PageChangeAnimation = styled.div<PageChangeAnimationProps>`
       position: absolute;
       top: 0;
       left: 0;
-      height: 100vh;
+      height: 100%;
       width: 100vw;
       background: rgba(0, 0, 0, 0.3);
       opacity: 0;

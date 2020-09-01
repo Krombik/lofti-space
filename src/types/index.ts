@@ -23,6 +23,8 @@ export type XOR<T, U> = T | U extends object
 
 export type ThemeProps = GenericThemeProps<Theme>;
 
-export type Img = { src: string; alt: string };
+export type ImgType = { src: string; alt: string };
+
+export type SpaceCarouselType = { image: string; title: string; slug: string };
 
 export type NavigationType = { path: string; Component: FC };

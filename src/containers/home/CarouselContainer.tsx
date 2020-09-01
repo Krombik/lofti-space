@@ -1,37 +1,18 @@
 import React, { FC, useRef } from "react";
-import { Img, BreakpointObj } from "types";
+import { ImgType } from "types";
 import "styled-components/macro";
-import { css } from "styled-components/macro";
 import RedGrid, { RedGridProps } from "containers/common/RedGrid";
-import makeResponsive from "utils/makeResponsive";
 import Slider from "react-slick";
-import Carousel, { StyledCarousel } from "./Carousel";
-import CarouselPagination, {
-  StyledCarouselPagination,
-} from "./CarouselPagination";
+import CarouselPagination from "./CarouselPagination";
 import { useMediaQuery, Theme } from "@material-ui/core";
-import CarouselButtonsContainer from "./CarouselButtonsContainer";
+import CarouselButtonsContainer from "../../components/home/CarouselButtonsContainer";
+import Carousel from "containers/carousel/Carousel";
+import Img from "components/common/Img";
+import Grid from "components/styled/Grid";
 
 type Props = {
-  content: Img[];
+  content: ImgType[];
 };
-
-const responsiveContainer = makeResponsive((_, size: number) => {
-  const paginationWidth = 100 / size;
-  const sliderWidth = 100 - paginationWidth;
-  return css`
-    ${StyledCarousel} {
-      flex-basis: ${sliderWidth}%;
-      max-width: ${sliderWidth}%;
-      flex-grow: 0;
-    }
-    ${StyledCarouselPagination} {
-      flex-basis: ${paginationWidth}%;
-      max-width: ${paginationWidth}%;
-      flex-grow: 0;
-    }
-  `;
-});
 
 const CarouselContainer: FC<Props & RedGridProps> = ({
   content,
@@ -69,39 +50,45 @@ const CarouselContainer: FC<Props & RedGridProps> = ({
     slider.current?.slickPrev();
   };
   return (
-    <RedGrid
-      item
-      redBreakpoints={redBreakpoints}
-      container
-      wrap="nowrap"
-      alignItems="center"
-      {...props}
-      css={`
-        height: 100%;
-        width: 100%;
-        position: relative;
-        ${({ lg }: RedGridProps) =>
-          responsiveContainer({ lg } as BreakpointObj<number>)}
-      `}
-    >
-      <Carousel
-        content={content}
-        beforeChange={handleSliderChange}
-        ref={slider}
-      />
-      {moreThanLg && (
-        <CarouselPagination
-          content={content}
-          beforeChange={handleSliderPaginationChange}
-          ref={pagination}
-        />
-      )}
-      <CarouselButtonsContainer
+    <>
+      <RedGrid
         redBreakpoints={redBreakpoints}
-        onNextSlide={handleNextSlide}
-        onPrevSlide={handlePrevSlide}
-      />
-    </RedGrid>
+        container
+        wrap="nowrap"
+        alignItems="center"
+        {...props}
+        css={`
+          position: relative;
+          margin-left: auto;
+        `}
+      >
+        <Carousel
+          items={content}
+          renderItem={(props) => <Img src={props.src} alt={props.alt} />}
+          sliderBreakpoints={{
+            xs: { w: 12, h: 14 },
+            sm: { w: 6, h: 8 },
+            lg: { w: 4, h: 6 },
+          }}
+          beforeChange={handleSliderChange}
+          ref={slider}
+        />
+        <CarouselButtonsContainer
+          redBreakpoints={redBreakpoints}
+          onNextSlide={handleNextSlide}
+          onPrevSlide={handlePrevSlide}
+        />
+      </RedGrid>
+      {moreThanLg && (
+        <Grid item lg={1}>
+          <CarouselPagination
+            content={content}
+            beforeChange={handleSliderPaginationChange}
+            ref={pagination}
+          />
+        </Grid>
+      )}
+    </>
   );
 };
 

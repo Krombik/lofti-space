@@ -5,7 +5,7 @@ import { spacingFunc } from "./Container";
 import { RedGridProps, ResponsiveRedGrid } from "containers/common/RedGrid";
 
 const responsiveHeaderColor = makeResponsive(
-  (_, value: ResponsiveRedGrid) => css`
+  (value: ResponsiveRedGrid) => css`
     color: var(
       --${value.position === "item" || (value.size !== 12 && !value.right) ? "black" : "white"}
     );
@@ -13,7 +13,7 @@ const responsiveHeaderColor = makeResponsive(
 );
 
 const responsiveHeaderFontSize = makeResponsive(
-  (_, value: number) => css`
+  (value: number) => css`
     font-size: ${value}px;
   `
 )({ xs: 11, md: 20 });
@@ -25,7 +25,7 @@ const responsiveHeaderHeightVariables = makeResponsiveVariables(
   true
 );
 
-const Header = styled.header<RedGridProps>`
+const Header = styled.header<Partial<RedGridProps>>`
   z-index: 5;
   position: absolute;
   font-weight: bolder;
@@ -35,7 +35,8 @@ const Header = styled.header<RedGridProps>`
   width: 100%;
   padding: inherit;
   padding-bottom: 0;
-  ${({ redBreakpoints }) => responsiveHeaderColor(redBreakpoints)}
+  ${({ redBreakpoints }) =>
+    redBreakpoints && responsiveHeaderColor(redBreakpoints)}
   ${responsiveHeaderHeightVariables}
   * {
     ${responsiveHeaderFontSize}
@@ -48,6 +49,7 @@ const Header = styled.header<RedGridProps>`
       font-weight: inherit;
       color: inherit;
       background: transparent;
+      border-radius: 0;
       &:hover {
         background: transparent;
       }

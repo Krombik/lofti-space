@@ -11,7 +11,7 @@ type ResponsiveMenuLink = {
 };
 
 const responsiveMenuLink = makeResponsive(
-  ({ theme }, value: ResponsiveMenuLink) => css`
+  (value: ResponsiveMenuLink, { theme }) => css`
     padding-bottom: ${theme.spacing(value.paddingBottom)}px;
     &::after {
       width: ${value.lineWidth.normal}%;
@@ -38,7 +38,7 @@ const _MenuLink: FC<LinkProps & MuiLinkProps> = (props) => (
 const MenuLink = styled(_MenuLink)`
   position: relative;
   display: block;
-  font-size: var(--h3-fontSize);
+  font-size: var(--h3);
   font-weight: bold;
   &::after {
     content: "";

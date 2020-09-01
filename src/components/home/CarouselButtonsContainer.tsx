@@ -5,6 +5,8 @@ import styled, { css } from "styled-components/macro";
 import { RedGridProps, ResponsiveRedGrid } from "containers/common/RedGrid";
 import makeResponsive from "utils/makeResponsive";
 import ArrowButton from "./ArrowButton";
+import ArrowRightIcon from "icons/ArrowRight";
+import ArrowLeftIcon from "icons/ArrowLeft";
 
 const buttonSize = (height: boolean, position?: string) =>
   `calc(${
@@ -18,7 +20,7 @@ const buttonSize = (height: boolean, position?: string) =>
   })`;
 
 const responsiveArrowButtonSize = makeResponsive(
-  (_, { position }: ResponsiveRedGrid) => css`
+  ({ position }: ResponsiveRedGrid) => css`
     height: ${buttonSize(true, position)};
     width: ${buttonSize(false, position)};
   `
@@ -36,7 +38,7 @@ const StyledCarouselButtonsContainerWrapper = styled.div`
 const StyledCarouselButtonsContainer = styled.div<RedGridProps>`
   ${({ redBreakpoints }) => responsiveArrowButtonSize(redBreakpoints)}
   background: var(--white);
-  box-shadow: -0.2px 0 0 0 var(--white);
+  overflow: hidden;
 `;
 
 type Props = { onPrevSlide: () => void; onNextSlide: () => void };
@@ -48,8 +50,12 @@ const CarouselButtonsContainer: FC<RedGridProps & Props> = ({
 }) => (
   <StyledCarouselButtonsContainerWrapper>
     <StyledCarouselButtonsContainer redBreakpoints={redBreakpoints}>
-      <ArrowButton onClick={onPrevSlide} />
-      <ArrowButton onClick={onNextSlide} next />
+      <ArrowButton color="primary" onClick={onPrevSlide}>
+        <ArrowRightIcon />
+      </ArrowButton>
+      <ArrowButton color="primary" onClick={onNextSlide}>
+        <ArrowLeftIcon />
+      </ArrowButton>
     </StyledCarouselButtonsContainer>
   </StyledCarouselButtonsContainerWrapper>
 );

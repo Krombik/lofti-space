@@ -17,7 +17,6 @@ export type ResponsiveSpacingProps = {
   spacingBreakpoints?: SpacingBreakpoints;
   directionBreakpoints?: DirectionBreakpoints;
   justifyBreakpoints?: JustifyBreakpoints;
-  main?: boolean;
 };
 
 export type GridProps<C extends React.ElementType> = ResponsiveSpacingProps &
@@ -27,18 +26,17 @@ const _Grid = <C extends React.ElementType>({
   spacingBreakpoints,
   directionBreakpoints,
   justifyBreakpoints,
-  main,
   ...props
 }: GridProps<C>) => <MuiGrid {...props} />;
 
 const responsiveGridDirection = makeResponsive(
-  (_, value: GridDirection) => css`
+  (value: GridDirection) => css`
     flex-direction: ${value};
   `
 );
 
 const responsiveGridJustify = makeResponsive(
-  (_, value: GridJustification) => css`
+  (value: GridJustification) => css`
     justify-content: ${value};
   `
 );
@@ -49,12 +47,6 @@ const containerMixin = css`
   width: calc(100% + var(--gridSpacing-l));
   > .MuiGrid-item {
     padding: calc(var(--gridSpacing-t) / 2) calc(var(--gridSpacing-l) / 2);
-  }
-`;
-
-const mainContainerMixin = css`
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    margin-top: 0;
   }
 `;
 
@@ -70,16 +62,20 @@ const Grid = styled(_Grid)`
     })}
   ${({ spacingBreakpoints, container }) =>
     container && spacingBreakpoints && containerMixin}
-  ${({ directionBreakpoints, container }) =>
+  ${({
+    directionBreakpoints,
+    container,
+  }) =>
     container &&
     directionBreakpoints &&
     responsiveGridDirection(directionBreakpoints)}
-  ${({ justifyBreakpoints, container }) =>
+  ${({
+    justifyBreakpoints,
+    container,
+  }) =>
     container &&
     justifyBreakpoints &&
     responsiveGridJustify(justifyBreakpoints)}
-  ${({ main }) => main && mainContainerMixin}
-  
 `;
 
 export default Grid as typeof _Grid & typeof Grid;

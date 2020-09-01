@@ -24,7 +24,7 @@ const RedBackground = styled.canvas`
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   z-index: -1;
   & + ${Grid} {
@@ -102,12 +102,14 @@ const RedGrid = memo(
           );
         }
       };
-      (document as any).fonts.ready.then(async () => {
-        handleResize();
-      });
+      if (document.readyState !== "loading") handleResize();
+      else window.addEventListener("load", handleResize);
       window.addEventListener("resize", handleResize);
+      window.addEventListener("orientationchange", handleResize);
       return () => {
+        window.removeEventListener("load", handleResize);
         window.removeEventListener("resize", handleResize);
+        window.removeEventListener("orientationchange", handleResize);
       };
     }, [redBreakpoints]);
     return (

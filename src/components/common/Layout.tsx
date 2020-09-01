@@ -6,7 +6,9 @@ import BackTitle from "containers/common/BackTitle";
 import { RedBreakpointsProps } from "containers/common/RedGrid";
 import Grid, { GridProps } from "components/styled/Grid";
 import Navigation from "containers/common/Navigation";
-import { NavigationType } from "types";
+import { css } from "styled-components/macro";
+import { MAIN_CONTAINER } from "utils/constant";
+import { ThemeProps } from "types";
 
 export const LAYOUT_GUTTER = {
   xs: { t: 3, l: 7 },
@@ -23,7 +25,15 @@ type Props = {
   titleRight?: boolean;
 };
 
-const Layout: FC<Props & GridProps<"div"> & RedBreakpointsProps> = ({
+const notMenuMixin = css`
+  padding: var(--headerHeight) 0;
+  @media (max-height: 800px) and (max-width: ${({ theme }: ThemeProps) =>
+      theme.breakpoints.values.sm}px) {
+    padding: calc(var(--headerHeight) + var(--containerGutter-t)) 0 0;
+  }
+`;
+
+const Layout: FC<Props & GridProps<"div"> & Partial<RedBreakpointsProps>> = ({
   menu = false,
   title,
   titleRight = false,
@@ -36,7 +46,7 @@ const Layout: FC<Props & GridProps<"div"> & RedBreakpointsProps> = ({
     <div
       css={`
         height: 100%;
-        padding: var(--headerHeight) 0;
+        ${!menu && notMenuMixin}
         > div {
           height: 100%;
         }
@@ -48,7 +58,7 @@ const Layout: FC<Props & GridProps<"div"> & RedBreakpointsProps> = ({
           alignItems="center"
           wrap="nowrap"
           spacingBreakpoints={LAYOUT_SPACING}
-          main
+          className={MAIN_CONTAINER}
           {...props}
         />
       </Grid>
