@@ -8,11 +8,6 @@ const CarouselCard = styled(Container).attrs(() => ({
 }))`
   position: relative;
   display: flex;
-  color: var(--white);
-  text-transform: uppercase;
-  a {
-    font-weight: bold;
-  }
 `;
 
 export default CarouselCard;

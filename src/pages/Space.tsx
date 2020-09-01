@@ -1,17 +1,12 @@
 import React, { FC, memo } from "react";
 import Grid, { DirectionBreakpoints } from "components/styled/Grid";
 import Layout from "components/common/Layout";
-import Typography from "components/styled/Typography";
+import Typography from "@material-ui/core/Typography";
 import Button from "components/styled/Button";
 import "styled-components/macro";
-import Carousel from "containers/carousel/Carousel";
-import { ImgType, SpaceCarouselType } from "types";
-import Img from "components/common/Img";
+import { SpaceType } from "types";
 import PageInfo from "components/common/PageInfo";
 import CarouselItem from "components/space/CarouselItem";
-import { IconButton } from "@material-ui/core";
-import ArrowLeft from "icons/ArrowLeft";
-import ArrowRight from "icons/ArrowRight";
 import CarouselContainer from "containers/carousel/CarouselContainer";
 
 const DIRECTION_BREAKPOINTS: DirectionBreakpoints = {
@@ -20,7 +15,7 @@ const DIRECTION_BREAKPOINTS: DirectionBreakpoints = {
 };
 
 const Space: FC = memo(() => {
-  const data: SpaceCarouselType[] = new Array(10).fill({
+  const data: SpaceType[] = new Array(10).fill({
     image: "img/img.jpg",
     title: "Open space",
     slug: "",

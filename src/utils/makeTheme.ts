@@ -7,23 +7,29 @@ const makeTheme = () =>
       fontFamily: "Montserrat",
       h3: {
         fontWeight: "bold",
+        lineHeight: 1.2125,
+        fontSize: "var(--h3)",
       },
       h2: {
         fontWeight: "bold",
-        fontSize: undefined,
+        fontSize: "var(--h2)",
         lineHeight: 1.2125,
       },
       h1: {
         fontWeight: "bold",
-        fontSize: undefined,
+        fontSize: "var(--h1)",
         lineHeight: 1.2125,
       },
       body1: {
-        fontSize: undefined,
+        fontSize: "var(--body1)",
+        lineHeight: 1.2,
+      },
+      body2: {
+        fontSize: "var(--body2)",
         lineHeight: 1.2,
       },
       button: {
-        fontSize: "16px",
+        fontSize: "var(--button)",
         lineHeight: 1.1875,
         fontWeight: "bold",
       },

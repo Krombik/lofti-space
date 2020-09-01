@@ -2,7 +2,7 @@ import React, { FC, memo } from "react";
 import Grid, { DirectionBreakpoints } from "components/styled/Grid";
 import { RedBreakpoints } from "containers/common/RedGrid";
 import Layout from "components/common/Layout";
-import Typography from "components/styled/Typography";
+import Typography from "@material-ui/core/Typography";
 import Button from "components/styled/Button";
 import CarouselContainer from "containers/home/CarouselContainer";
 import PageInfo from "components/common/PageInfo";

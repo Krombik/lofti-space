@@ -13,8 +13,8 @@ const NAVIGATION_SPACING = { xs: { t: 2, l: 0 }, md: { t: 6, l: 0 } };
 
 const responsiveColor = makeResponsive(
   (value: ResponsiveRedGrid) => css`
-    color: var(--${value.right ? "grey" : "pink"});
-    --active-color: var(--${value.right ? "primary" : "white"});
+    color: var(--${value.right || !value.size ? "grey" : "pink"});
+    --active-color: var(--${value.right || !value.size ? "primary" : "white"});
   `
 );
 
@@ -32,7 +32,7 @@ const Navigation: FC<Partial<RedBreakpointsProps>> = ({ redBreakpoints }) => {
         top: 0;
         padding: var(--containerGutter-t) 0;
         height: 100%;
-        ${responsiveColor(redBreakpoints || { xs: { right: true, size: 0 } })}
+        ${responsiveColor(redBreakpoints || { xs: { size: 0 } })}
       `}
     >
       <Grid

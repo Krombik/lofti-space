@@ -11,6 +11,7 @@ import {
 import Slider from "react-slick";
 import makeResponsive from "utils/makeResponsive";
 import { css } from "styled-components/macro";
+import ArrowButtonsContainer from "./ArrowButtonsContainer";
 
 const responsiveButtonColor = makeResponsive(
   (value: ResponsiveRedGrid) => css`
@@ -44,31 +45,11 @@ const CarouselContainer = <T extends any>({
     >
       <Carousel disableRightGutter {...props} ref={slider} />
       {moreThanSm && (
-        <div
-          css={`
-            position: absolute;
-            ${redBreakpoints
-              ? responsiveButtonColor(redBreakpoints)
-              : "color: var(--primary);"}
-            top: 100%;
-            display: flex;
-            height: calc((100vh - 100%) / 2);
-            align-items: center;
-            justify-content: space-between;
-            right: 0;
-            min-width: calc(
-              (100vw - var(--containerGutter-l) * 2 + var(--gridSpacing-l)) / 12 -
-                var(--gridSpacing-l)
-            );
-          `}
-        >
-          <IconButton color="inherit" onClick={handlePrevSlide}>
-            <ArrowRight />
-          </IconButton>
-          <IconButton color="inherit" onClick={handleNextSlide}>
-            <ArrowLeft />
-          </IconButton>
-        </div>
+        <ArrowButtonsContainer
+          redBreakpoints={redBreakpoints}
+          prev={handlePrevSlide}
+          next={handleNextSlide}
+        />
       )}
     </div>
   );

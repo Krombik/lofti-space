@@ -69,7 +69,7 @@ const RedGrid = memo(
           const canvasCss = window.getComputedStyle(ctx.canvas);
           ctx.fillStyle = canvasCss.getPropertyValue("--red");
           let backgroundWidth = width;
-          if (size !== 12) {
+          if (size && size !== 12) {
             const gutterWidth = parseInt(
               canvasCss.getPropertyValue("--containerGutter-l"),
               10
@@ -84,22 +84,26 @@ const RedGrid = memo(
                 spacingWidth
             );
           }
-          ctx.fillRect(
-            right ? width - backgroundWidth : 0,
-            position !== "item" ? 0 : item.offsetTop,
-            backgroundWidth,
-            !position
-              ? height
-              : item.offsetHeight +
-                  item.offsetTop -
-                  parseInt(canvasCss.getPropertyValue("--gridSpacing-t"), 10) /
-                    2 -
-                  parseInt(
-                    canvasCss.getPropertyValue("--containerGutter-t"),
-                    10
-                  ) -
-                  parseInt(canvasCss.getPropertyValue("--headerHeight"), 10)
-          );
+          if (size)
+            ctx.fillRect(
+              right ? width - backgroundWidth : 0,
+              position !== "item" ? 0 : item.offsetTop,
+              backgroundWidth,
+              !position
+                ? height
+                : item.offsetHeight +
+                    item.offsetTop -
+                    parseInt(
+                      canvasCss.getPropertyValue("--gridSpacing-t"),
+                      10
+                    ) /
+                      2 -
+                    parseInt(
+                      canvasCss.getPropertyValue("--containerGutter-t"),
+                      10
+                    ) -
+                    parseInt(canvasCss.getPropertyValue("--headerHeight"), 10)
+            );
         }
       };
       if (document.readyState !== "loading") handleResize();

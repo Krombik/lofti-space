@@ -1,9 +1,33 @@
 import { createGlobalStyle } from "styled-components";
 import { ThemeProps } from "types";
 import makeResponsiveVariables from "utils/makeResponsiveVariables";
-import { TYPOGRAPHY } from "./Typography";
 
-const responsiveTypographyVariables = makeResponsiveVariables(TYPOGRAPHY);
+const responsiveTypographyVariables = makeResponsiveVariables({
+  h1: {
+    xs: "30px",
+    lg: "80px",
+  },
+  h2: {
+    xs: "30px",
+    lg: "60px",
+  },
+  h3: {
+    xs: "30px",
+    lg: "40px",
+  },
+  body1: {
+    xs: "16px",
+    lg: "24px",
+  },
+  body2: {
+    xs: "14px",
+    lg: "18px",
+  },
+  button: {
+    xs: "11px",
+    lg: "16px",
+  },
+});
 
 const GlobalStyle = createGlobalStyle`
   body {

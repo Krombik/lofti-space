@@ -13,7 +13,6 @@ import styled from "styled-components/macro";
 import { shadowMixin } from "utils/mixins";
 import makeResponsiveVariables from "utils/makeResponsiveVariables";
 import { BreakpointObj } from "types";
-import { useTheme } from "@material-ui/core";
 import { MAIN_CONTAINER } from "utils/constant";
 
 const Wrapper = styled.div`
@@ -86,28 +85,30 @@ const Carousel = forwardRef((<T extends any>(
   { renderItem, items, ...props }: CarouselProps<T>,
   outerRef: MutableRefObject<Slider | null> | null
 ) => {
-  const theme = useTheme();
   const innerRef = useRef<Slider>(null);
   const ref = outerRef || innerRef;
   useLayoutEffect(() => {
     const updateSliderHeight = () => {
       const slider = (ref.current as any).innerSlider.list
         .parentElement as HTMLElement;
-      if (document.documentElement.clientWidth < theme.breakpoints.values.sm) {
-        const sliderParent = findMainContainerChild(slider.parentElement);
-        const restElementsHeight = Array.from(
-          sliderParent!.parentElement!.children
-        ).reduce(
-          (sum, curr) =>
-            curr !== sliderParent && curr.tagName !== "CANVAS"
-              ? sum + curr.clientHeight
-              : sum,
-          0
-        );
-        slider.style.maxHeight = `calc(${
-          document.documentElement.clientHeight - restElementsHeight
-        }px - var(--headerHeight) - (var(--containerGutter-t)) * 3)`;
-      } else slider.removeAttribute("style");
+      const sliderParent = findMainContainerChild(slider.parentElement);
+      const restElementsHeight = (Array.from(
+        sliderParent?.parentElement?.children || []
+      ) as HTMLElement[]).reduce(
+        (sum, curr) =>
+          curr !== sliderParent &&
+          curr.tagName !== "CANVAS" &&
+          curr.offsetLeft === sliderParent?.offsetLeft
+            ? sum + curr.offsetHeight
+            : sum,
+        0
+      );
+      if (restElementsHeight)
+        slider.style.maxHeight = `${
+          sliderParent!.parentElement!.parentElement!.offsetHeight -
+          restElementsHeight
+        }px`;
+      else slider.removeAttribute("style");
     };
     if (document.readyState !== "loading") updateSliderHeight();
     else window.addEventListener("load", updateSliderHeight);

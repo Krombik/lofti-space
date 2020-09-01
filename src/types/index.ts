@@ -25,6 +25,8 @@ export type ThemeProps = GenericThemeProps<Theme>;
 
 export type ImgType = { src: string; alt: string };
 
-export type SpaceCarouselType = { image: string; title: string; slug: string };
+export type SpaceType = { image: string; title: string; slug: string };
+
+export type TariffType = { title: string; slug: string; price: number };
 
 export type NavigationType = { path: string; Component: FC };
