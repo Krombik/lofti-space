@@ -89,20 +89,19 @@ const RedGrid = memo(
               right ? width - backgroundWidth : 0,
               position !== "item" ? 0 : item.offsetTop,
               backgroundWidth,
-              !position
-                ? height
-                : item.offsetHeight +
-                    item.offsetTop -
-                    parseInt(
-                      canvasCss.getPropertyValue("--gridSpacing-t"),
-                      10
-                    ) /
-                      2 -
-                    parseInt(
-                      canvasCss.getPropertyValue("--containerGutter-t"),
-                      10
-                    ) -
-                    parseInt(canvasCss.getPropertyValue("--headerHeight"), 10)
+              position === "item"
+                ? item.offsetHeight
+                : position === "top"
+                ? item.offsetHeight +
+                  item.offsetTop -
+                  parseInt(canvasCss.getPropertyValue("--gridSpacing-t"), 10) /
+                    2 -
+                  parseInt(
+                    canvasCss.getPropertyValue("--containerGutter-t"),
+                    10
+                  ) -
+                  parseInt(canvasCss.getPropertyValue("--headerHeight"), 10)
+                : height
             );
         }
       };

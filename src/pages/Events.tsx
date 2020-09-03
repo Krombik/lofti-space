@@ -10,26 +10,29 @@ import CarouselContainer from "containers/carousel/CarouselContainer";
 import RedGrid, { RedBreakpoints } from "containers/common/RedGrid";
 
 const RED_BREAKPOINTS: RedBreakpoints = {
-  sm: { size: 2, right: true },
+  sm: { size: 9, right: true, position: "item" },
   xs: { size: 0 },
 };
 
-const Tariffs: FC = memo(() => {
+const Events: FC = memo(() => {
   const data: TariffType[] = new Array(10).fill({
     title: "Дневной пропуск",
     price: 300,
     slug: "",
   });
   return (
-    <Layout title="Tariffs" titleRight redBreakpoints={RED_BREAKPOINTS}>
-      <Grid item lg={6}>
+    <Layout
+      title="events"
+      redBreakpoints={RED_BREAKPOINTS}
+      justify="flex-end"
+      wrap="wrap"
+    >
+      <Grid item lg={10}>
         <PageInfo>
-          <Typography variant="h2">
-            Выберите свой оптимальный вариант
-          </Typography>
+          <Typography variant="h2">Актуальные события</Typography>
         </PageInfo>
       </Grid>
-      <RedGrid redBreakpoints={RED_BREAKPOINTS} item container>
+      <RedGrid redBreakpoints={RED_BREAKPOINTS} item container lg={10}>
         <CarouselContainer
           items={data}
           renderItem={(props) => <CarouselItem {...props} />}
@@ -42,4 +45,4 @@ const Tariffs: FC = memo(() => {
   );
 });
 
-export default Tariffs;
+export default Events;

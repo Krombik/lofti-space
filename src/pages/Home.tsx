@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import Grid, { DirectionBreakpoints } from "components/styled/Grid";
+import Grid from "components/styled/Grid";
 import { RedBreakpoints } from "containers/common/RedGrid";
 import Layout from "components/common/Layout";
 import Typography from "@material-ui/core/Typography";
@@ -13,11 +13,6 @@ const RED_BREAKPOINTS: RedBreakpoints = {
   xs: { size: 9, right: true, position: "top" },
 };
 
-const DIRECTION_BREAKPOINTS: DirectionBreakpoints = {
-  xs: "column-reverse",
-  sm: "row",
-};
-
 const Home: FC = memo(() => {
   const imgs = new Array(11).fill({ src: "img/img.jpg", alt: "img" });
   return (
@@ -25,8 +20,8 @@ const Home: FC = memo(() => {
       title="lofti"
       titleRight
       redBreakpoints={RED_BREAKPOINTS}
-      directionBreakpoints={DIRECTION_BREAKPOINTS}
       justify="center"
+      wrap="wrap-reverse"
     >
       <Grid item sm={6}>
         <PageInfo

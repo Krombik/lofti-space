@@ -65,11 +65,8 @@ const CarouselContainer: FC<Props & RedGridProps> = ({
         <Carousel
           items={content}
           renderItem={(props) => <Img src={props.src} alt={props.alt} />}
-          sliderBreakpoints={{
-            xs: { w: 12, h: 14 },
-            sm: { w: 6, h: 8 },
-            lg: { w: 4, h: 6 },
-          }}
+          heightBreakpoints={{ xs: 14, sm: 8, lg: 6 }}
+          widthBreakpoints={{ xs: 12, sm: 6, lg: 4 }}
           beforeChange={handleSliderChange}
           ref={slider}
         />

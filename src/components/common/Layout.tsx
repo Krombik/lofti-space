@@ -46,22 +46,18 @@ const Layout: FC<Props & GridProps<"div"> & Partial<RedBreakpointsProps>> = ({
     <div
       css={`
         height: 100%;
+        display: flex;
+        align-items: center;
         ${!menu && notMenuMixin}
-        > div {
-          height: 100%;
-        }
       `}
     >
-      <Grid item container>
-        <Grid
-          container
-          alignItems="center"
-          wrap="nowrap"
-          spacingBreakpoints={LAYOUT_SPACING}
-          className={MAIN_CONTAINER}
-          {...props}
-        />
-      </Grid>
+      <Grid
+        container
+        alignItems="center"
+        spacingBreakpoints={LAYOUT_SPACING}
+        className={MAIN_CONTAINER}
+        {...props}
+      />
     </div>
     <BackTitle title={title} right={titleRight} />
   </Container>

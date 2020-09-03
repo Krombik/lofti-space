@@ -7,9 +7,11 @@ const Img: FC<ComponentProps<"img"> & { background?: boolean }> = ({
 }) => {
   const ref = useRef<HTMLImageElement>(null);
   useEffect(() => {
+    console.log("e-img");
     const img = ref.current;
     const imgWrapper = img?.parentElement;
     const updateImageSize = () => {
+      console.log("img");
       if (img && imgWrapper)
         if (Math.round((imgWrapper!.offsetWidth / img.offsetWidth) * 10) > 10) {
           img.style.removeProperty("max-width");
@@ -21,11 +23,15 @@ const Img: FC<ComponentProps<"img"> & { background?: boolean }> = ({
           img.style.maxWidth = "none";
         }
     };
-    img?.addEventListener("load", updateImageSize);
+    if (document.readyState !== "loading") {
+      if (img?.naturalWidth) updateImageSize();
+      else img?.addEventListener("load", updateImageSize);
+    } else window.addEventListener("load", updateImageSize);
     window.addEventListener("resize", updateImageSize);
     window.addEventListener("orientationchange", updateImageSize);
     return () => {
       img?.removeEventListener("load", updateImageSize);
+      window.removeEventListener("load", updateImageSize);
       window.removeEventListener("resize", updateImageSize);
       window.removeEventListener("orientationchange", updateImageSize);
     };

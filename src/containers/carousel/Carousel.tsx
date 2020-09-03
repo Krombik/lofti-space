@@ -6,48 +6,43 @@ import React, {
   MutableRefObject,
   ReactElement,
   useLayoutEffect,
+  useEffect,
 } from "react";
 import Slider, { Settings } from "react-slick";
 import "styled-components/macro";
 import styled from "styled-components/macro";
-import { shadowMixin } from "utils/mixins";
+import { shadowMixin, responsiveHeightMixin } from "utils/mixins";
 import makeResponsiveVariables from "utils/makeResponsiveVariables";
 import { BreakpointObj } from "types";
 import { MAIN_CONTAINER } from "utils/constant";
+import responsiveHeight from "utils/responsiveHeight";
 
 const Wrapper = styled.div`
   position: relative;
   width: calc(
-    (100vw - var(--containerGutter-l) * 2 + var(--gridSpacing-l)) *
-      var(--slider-w) / 12 - var(--gridSpacing-l)
+    (100vw - var(--containerGutter-l) * 2 + var(--gridSpacing-l)) * var(--width) /
+      12 - var(--gridSpacing-l)
   ) !important;
   height: 100%;
 `;
-
-type SliderBreakpoints = BreakpointObj<{ h: number; w: number }>;
 type SliderProps = Settings & {
-  sliderBreakpoints: SliderBreakpoints;
+  heightBreakpoints: BreakpointObj<number>;
+  widthBreakpoints: BreakpointObj<number>;
   disableRightGutter?: boolean;
 };
 
 const _Slider = forwardRef<Slider, SliderProps & { children: ReactNode }>(
-  ({ sliderBreakpoints, disableRightGutter, ...props }, ref) => (
+  ({ heightBreakpoints, disableRightGutter, ...props }, ref) => (
     <Slider {...props} ref={ref} />
   )
 );
 
 export const StyledSlider = styled(_Slider)`
-  ${({ sliderBreakpoints }) =>
-    makeResponsiveVariables({ slider: sliderBreakpoints })}
+  ${responsiveHeightMixin}
   width: ${({ disableRightGutter }) =>
     disableRightGutter ? "calc(100% + var(--containerGutter-l))" : "100%"};
-  height: calc(
-    (100vw - var(--containerGutter-l) * 2 + var(--gridSpacing-l)) *
-      var(--slider-h) / 12 - var(--gridSpacing-l)
-  );
-  max-height: calc(
-    100vh - (var(--containerGutter-t) + var(--headerHeight)) * 2
-  );
+  ${({ widthBreakpoints }) =>
+    makeResponsiveVariables({ width: widthBreakpoints })}
   ${shadowMixin}
   .slick {
     &-list {
@@ -87,39 +82,13 @@ const Carousel = forwardRef((<T extends any>(
 ) => {
   const innerRef = useRef<Slider>(null);
   const ref = outerRef || innerRef;
-  useLayoutEffect(() => {
-    const updateSliderHeight = () => {
-      const slider = (ref.current as any).innerSlider.list
-        .parentElement as HTMLElement;
-      const sliderParent = findMainContainerChild(slider.parentElement);
-      const restElementsHeight = (Array.from(
-        sliderParent?.parentElement?.children || []
-      ) as HTMLElement[]).reduce(
-        (sum, curr) =>
-          curr !== sliderParent &&
-          curr.tagName !== "CANVAS" &&
-          curr.offsetLeft === sliderParent?.offsetLeft
-            ? sum + curr.offsetHeight
-            : sum,
-        0
-      );
-      if (restElementsHeight)
-        slider.style.maxHeight = `${
-          sliderParent!.parentElement!.parentElement!.offsetHeight -
-          restElementsHeight
-        }px`;
-      else slider.removeAttribute("style");
-    };
-    if (document.readyState !== "loading") updateSliderHeight();
-    else window.addEventListener("load", updateSliderHeight);
-    window.addEventListener("resize", updateSliderHeight);
-    window.addEventListener("orientationchange", updateSliderHeight);
-    return () => {
-      window.removeEventListener("load", updateSliderHeight);
-      window.removeEventListener("resize", updateSliderHeight);
-      window.removeEventListener("orientationchange", updateSliderHeight);
-    };
-  }, []);
+  useLayoutEffect(
+    () =>
+      responsiveHeight(
+        (ref.current as any).innerSlider.list.parentElement as HTMLElement
+      ),
+    []
+  );
   return (
     <StyledSlider
       ref={ref}

@@ -7,7 +7,7 @@ type Value<Props> =
   | RV
   | any[]
   | ((props: Props) => RV)
-  | { [key: string]: Value<Props> };
+  | { [key: string]: Value<Props> | undefined };
 
 type Func<Props> =
   | ((value: any, props: Props) => RV)
